@@ -1,38 +1,28 @@
 #include <SDL.h>
-#include <stdio.h>
+#include <cstdio>
+#include "cmake-build-debug/system/window.h"
+#include "source/system/error.h"
+#include <string>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+using std::string;
 
 int main() {
-    //The window we'll be rendering to
-    SDL_Window *window = NULL;
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        error::FatalErrorExit(string("Unable to initialize video subsystem"));
 
-    //The surface contained by the window
-    SDL_Surface *screenSurface = NULL;
+    Window window{ string{"SDL Tutorial"}};
 
-    //Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-    } else {
-        window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-                                  SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-        if (window == NULL) {
-            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        } else {
 
-            screenSurface = SDL_GetWindowSurface(window);
-            SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-            SDL_UpdateWindowSurface(window);
+        SDL_FillRect(window.Surface, nullptr, SDL_MapRGB(window.Surface->format, 0xFF, 0xFF, 0xFF));
+        window.Update();
 
-            //Hack to get window to stay up
-            SDL_Event e;
-            bool quit = false;
-            while (quit == false) { while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; }}
-        }
+
+//        //Hack to get window to stay up
+        SDL_Event e;
+        bool quit = false;
+        while (quit == false) {
+            while (SDL_PollEvent(&e)) { if (e.type == SDL_QUIT) quit = true; }
     }
-    //Destroy window
-    SDL_DestroyWindow(window);
 
     //Quit SDL subsystems
     SDL_Quit();
