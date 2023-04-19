@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include "window.h"
 #include "error.h"
 
@@ -18,6 +19,13 @@ Window::Window(const string& title, int posX, int posY, const int sizeW, const i
             error::FatalErrorExit(string("Unable to create SDL Window"));
 
         Surface = SDL_GetWindowSurface(SDLWindow);
+
+        SDLRenderer = SDL_CreateRenderer(SDLWindow, -1, SDL_RENDERER_ACCELERATED);
+
+        int initResult = IMG_Init(IMG_INIT_PNG); // | IMG_INIT_JPG;
+
+        if (initResult == 0)
+            error::FatalErrorExit("Failed to initialize SDL2_image");
 }
 
 void Window::Update(){

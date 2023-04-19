@@ -1,12 +1,15 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <cstdio>
-#include "cmake-build-debug/system/window.h"
-#include "source/system/error.h"
 #include <string>
+
+#include "system/error.h"
+#include "system/window.h"
 
 using std::string;
 
-int main() {
+int main(int argc, char *argv[]) {
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         error::FatalErrorExit(string("Unable to initialize video subsystem"));
 
