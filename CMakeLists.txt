@@ -1,13 +1,35 @@
-cmake_minimum_required(VERSION 3.24)
-project(212_cpp_game_FelixAtForsberg)
+cmake_minimum_required(VERSION 3.26)
+project(212_cpp_game_FelixAtForsberg CXX)
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_STANDARD 23)
+# https://wiki.libsdl.org/SDL2/Installation
+# https://wiki.libsdl.org/SDL2/README/cmake
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+option(212_cpp_game_FelixAtForsberg_VENDORED "Use vendored libraries" OFF)
 
-#message(NOTICE ${SDL2_INCLUDE_DIRS})
+if(212_cpp_game_FelixAtForsberg_VENDORED)
+    add_subdirectory(vendored/sdl EXCLUDE_FROM_ALL)
+else()
+    # 1. Look for a SDL2 package, 2. look for the SDL2 component and 3. fail if none can be found
+    find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 
-add_executable(212_cpp_game_FelixAtForsberg source/main.cpp source/system/window.cpp source/system/window.h source/system/error.cpp source/system/error.h source/game/Game.cpp source/game/Game.h source/game/Image.cpp source/game/Image.h)
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} SDL2_image::SDL2_image)
+    # 1. Look for a SDL2 package, 2. Look for the SDL2maincomponent and 3. DO NOT fail when SDL2main is not available
+#    find_package(SDL2 REQUIRED CONFIG COMPONENTS SDL2main)
+
+    find_package(SDL2_image REQUIRED CONFIG COMPONENTS SDL2_image)
+endif()
+
+# Create your game executable target as usual
+add_executable(
+        212_cpp_game_FelixAtForsberg MACOSX_BUNDLE
+        source/main.cpp
+)
+
+# SDL2::SDL2main may or may not be available. It is e.g. required by Windows GUI applications
+if(TARGET SDL2::SDL2main)
+    # It has an implicit dependency on SDL2 functions, so it MUST be added before SDL2::SDL2 (or SDL2::SDL2-static)
+#    target_link_libraries(212_cpp_game_FelixAtForsberg PRIVATE SDL2::SDL2main)
+endif()
+
+# Link to the actual SDL2 library. SDL2::SDL2 is the shared SDL library, SDL2::SDL2-static is the static SDL libarary.
+target_link_libraries(212_cpp_game_FelixAtForsberg PRIVATE SDL2::SDL2 SDL2_image::SDL2_image)
