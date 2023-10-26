@@ -22,9 +22,8 @@ Window::Window(const string& title, int posX, int posY, const int sizeW, const i
 
         SDLRenderer = SDL_CreateRenderer(SDLWindow, -1, SDL_RENDERER_ACCELERATED);
 
-        int initResult = IMG_Init(IMG_INIT_PNG); // | IMG_INIT_JPG;
-
-        if (initResult == 0)
+        int initResult;
+        if (!( initResult = IMG_Init(IMG_INIT_PNG))) // | IMG_INIT_JPG;
             error::FatalErrorExit("Failed to initialize SDL2_image");
 }
 

@@ -12,3 +12,4 @@ void error::FatalErrorExit(const string &errorMsg, int exitCode) {
 
     exit(exitCode);
 }
+
