@@ -1,0 +1,122 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ArgumentSelectionDefects" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ArrayIndexOutOfBounds" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ClangTidy" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true">
+        <option name="clangTidyChecks" value="-*,mpi-*,cert-err52-cpp,cert-err60-cpp,cert-err34-c,cert-str34-c,cert-dcl21-cpp,cert-msc50-cpp,cert-oop58-cpp,cert-dcl50-cpp,cert-oop57-cpp,cert-msc51-cpp,cert-dcl58-cpp,cert-flp30-c,google-default-arguments,google-runtime-operator,google-explicit-constructor,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,hicpp-exception-baseclass,openmp-use-default-none,portability-*,-portability-restrict-system-includes,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*" />
+      </scope>
+      <option name="clangTidyChecks" value="-*,mpi-*,cert-err52-cpp,cert-err60-cpp,cert-err34-c,cert-str34-c,cert-dcl21-cpp,cert-msc50-cpp,cert-oop58-cpp,cert-dcl50-cpp,cert-oop57-cpp,cert-msc51-cpp,cert-dcl58-cpp,cert-flp30-c,google-default-arguments,google-runtime-operator,google-explicit-constructor,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,hicpp-exception-baseclass,openmp-use-default-none,portability-*,-portability-restrict-system-includes,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*" />
+    </inspection_tool>
+    <inspection_tool class="ClangdErrorsAndWarnings" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="Clazy" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ConstantConditionsOC" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ConstantFunctionResult" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ConstantParameter" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="ConvertInclude" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="DanglingPointer" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="EmptyDeclOrStmt" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="EndlessLoop" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="HidingNonVirtualFunction" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="InfiniteRecursion" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="LocalValueEscapesScope" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="LoopDoesntUseConditionVariable" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="MemoryLeak" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="Misra" enabled="true" level="WARNING" enabled_by_default="false">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="NotImplementedFunctions" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="NotInitializedField" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="NullDereference" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCInconsistentNaming" enabled="true" level="TEXT ATTRIBUTES" enabled_by_default="true" editorAttributes="CONSIDERATION_ATTRIBUTES">
+      <scope name="Project Files" level="TEXT ATTRIBUTES" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedConcept" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedGlobalDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedIncludeDirective" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedMacro" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedStruct" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedTemplateParameter" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="OCUnusedTypeAlias" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="PreprocessorComment" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="Simplify" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnconstrainedVariableType" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnreachableCallsOfFunction" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnreachableCode" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnusedLocalVariable" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnusedParameter" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnusedValue" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="VirtualCallInCtorOrDtor" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Project Files" level="WARNING" enabled="true" />
+    </inspection_tool>
+  </profile>
+</component>
