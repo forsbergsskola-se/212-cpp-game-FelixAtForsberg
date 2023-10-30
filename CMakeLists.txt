@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # https://wiki.libsdl.org/SDL2/Installation
 # https://wiki.libsdl.org/SDL2/README/cmake
 
-option(USE_VENDORED_SDL "Use vendored SDL" OFF)
+option(USE_VENDORED_SDL "Use vendored SDL" ON)
 
 #add_library(system SHARED /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib)
 
@@ -48,3 +48,9 @@ endif()
 
 # Link to the actual SDL2 library. SDL2::SDL2 is the shared SDL library, SDL2::SDL2-static is the static SDL libarary.
 target_link_libraries(212_cpp_game_FelixAtForsberg PRIVATE SDL2::SDL2 SDL2_image::SDL2_image)
+
+add_custom_command(
+        TARGET 212_cpp_game_FelixAtForsberg POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/source/texture.png
+                ${CMAKE_CURRENT_BINARY_DIR}/source/texture.png)
