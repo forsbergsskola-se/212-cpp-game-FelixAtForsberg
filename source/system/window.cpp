@@ -28,26 +28,20 @@ Window::Window() {
     sdlWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                                  SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (sdlWindow == nullptr) {
-//        std::cout << std::format("Window could not be created! SDL Error: {}\n", SDL_GetError());
+        std::cout << "Window could not be created! SDL Error: " << SDL_GetError() << std::endl;
         return;
     }
 
     sdlSurface = SDL_GetWindowSurface(sdlWindow);
 
-    sdlRenderer = SDL_CreateRenderer( sdlWindow, -1, SDL_RENDERER_ACCELERATED );
-    if( sdlRenderer == nullptr )
-    {
-//        std::cout << std::format( "Renderer could not be created! SDL Error: {}\n", SDL_GetError() );
-    }
-
     //Initialize renderer color
-    SDL_SetRenderDrawColor( sdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    //SDL_SetRenderDrawColor( sdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
     //Initialize PNG loading
     int imgFlags = IMG_INIT_PNG;
     if( !( IMG_Init( imgFlags ) & imgFlags ) )
     {
-//        std::cout << std::format( "SDL_image could not initialize! SDL_image Error: {}\n", IMG_GetError() );
+        std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
     }
 
 }
@@ -78,26 +72,15 @@ void Window::LoadImageFromPath( const std::string& imagePath )
         return;
 	}
 
-
-    //Create texture from surface pixels
-    newTexture = SDL_CreateTextureFromSurface( sdlRenderer, loadedSurface );
-    if( newTexture == nullptr )
+    //Convert surface to screen format
+    SDL_Surface* optimizedSurface = SDL_ConvertSurface( loadedSurface, sdlSurface->format, 0 );
+    if( optimizedSurface == NULL )
     {
-        printf( "Unable to create texture from %s! SDL Error: %s\n", imagePath.c_str(), SDL_GetError() );
+        printf( "Unable to load image %s! SDL_image Error: %s\n", imagePath.c_str(), IMG_GetError() );
+        return;
     }
-
+    SDL_BlitSurface( optimizedSurface, NULL, sdlSurface, NULL );
     //Get rid of old loaded surface
     SDL_FreeSurface( loadedSurface );
-
-    if( newTexture == nullptr )
-	{
-//		std::cout << std::format( "Failed to load texture image!\n" );
-	}
-
-    //Load PNG texture
-    SDL_RenderClear(sdlRenderer);
-    SDL_RenderCopy(sdlRenderer, newTexture, NULL, NULL);
-    SDL_RenderPresent(sdlRenderer);
-
-
+    SDL_UpdateWindowSurface( sdlWindow );
 }
