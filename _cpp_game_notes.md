@@ -1,6 +1,18 @@
 https://www.libsdl.org/release/
 
 ---
+Fix:
+initialize `TextureFactory::renderer`
+           `TextureFactory::format` 
+
+Problem:
+  "TextureFactory::renderer", referenced from:
+      TextureFactory::CreateSurface(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
+      TextureFactory::CreateTexture(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
+      Window::SetWindowImage(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in window.cpp.o
+ld: symbol(s) not found for architecture x86_64
+
+---
 
 Run/Debug Configurations gets its info on targets from the project file CMake creates 
 when ran on an empty build tree (`cmake .``)
