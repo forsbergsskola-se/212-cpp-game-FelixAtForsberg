@@ -3,19 +3,16 @@ project(212_cpp_game_FelixAtForsberg C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(CMakeDependentOption)
-
-
-option(LOG_SOURCE_FILES_USED:BOOL "Print source files list" OFF)
-
-option(USE_MANUAL_SOURCE_FILES:BOOL "Provide the order of source files rather than globbing source directory" OFF)
+set(LOG_SOURCE_FILES_USED ON CACHE BOOL "Print source files list")
+set(USE_MANUAL_SOURCE_FILES ON CACHE BOOL "Provide the order of source files rather than globbing source directory")
 
 set(MANUAL_SOURCE_FILES
         source/main.cpp
         source/system/window.cpp
         source/system/window.h
         source/graphics/texture_factory.cpp
-        source/graphics/texture_factory.h)
+        source/graphics/texture_factory.h
+)
 
 
 # https://wiki.libsdl.org/SDL2/Installation
@@ -51,7 +48,9 @@ find_package(SDL2_image REQUIRED CONFIG COMPONENTS SDL2_image)
 
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp" "source/*.h")
 
+
 if(LOG_SOURCE_FILES_USED)
+    message(NOTICE "USE_MANUAL_SOURCE_FILES ${USE_MANUAL_SOURCE_FILES}")
 message(NOTICE "=================================")
 message(NOTICE "SOURCE FILES:")
 foreach (FILE ${SOURCE_FILES})
