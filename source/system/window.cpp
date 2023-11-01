@@ -1,10 +1,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include <SDL_video.h>
+
 #include <iostream>
 #include <string>
 #include <cstdio>
-#include <format>
+
 #include "window.h"
+#include "../graphics/texture_factory.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -20,6 +23,14 @@ Window::Window() {
 
     SDL_Init( SDL_INIT_VIDEO );
 
+    //Initialize PNG loading
+    int imgFlags = IMG_INIT_PNG;
+    if( !( IMG_Init( imgFlags ) & imgFlags ) )
+    {
+        std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
+    }
+
+
 
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
         printf("Warning: Linear texture filtering not enabled!");
@@ -32,55 +43,40 @@ Window::Window() {
         return;
     }
 
-    sdlSurface = SDL_GetWindowSurface(sdlWindow);
+    windowRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
+
 
     //Initialize renderer color
-    //SDL_SetRenderDrawColor( sdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+//    SDL_SetRenderDrawColor( windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
-    //Initialize PNG loading
-    int imgFlags = IMG_INIT_PNG;
-    if( !( IMG_Init( imgFlags ) & imgFlags ) )
-    {
-        std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
-    }
 
 }
 
 Window::~Window()
 {
-
 	//Destroy window
-	SDL_DestroyRenderer( sdlRenderer );
+	SDL_DestroyRenderer(windowRenderer );
 	SDL_DestroyWindow( sdlWindow );
 	sdlWindow = nullptr;
-	sdlRenderer = nullptr;
+    windowRenderer = nullptr;
 
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
 }
 
-void Window::LoadImageFromPath( const std::string& imagePath )
+void Window::SetWindowImage(std::string& imagePath)
 {
-    SDL_Texture* newTexture;
+    assert(windowRenderer != nullptr);
+    assert(windowSurface->format != nullptr);
 
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( imagePath.c_str() );
-	if( loadedSurface == nullptr )
-	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", imagePath.c_str(), IMG_GetError() );
-        return;
-	}
+    TextureFactory::renderer = windowRenderer;
+    TextureFactory::format = windowSurface->format;
 
-    //Convert surface to screen format
-    SDL_Surface* optimizedSurface = SDL_ConvertSurface( loadedSurface, sdlSurface->format, 0 );
-    if( optimizedSurface == NULL )
-    {
-        printf( "Unable to load image %s! SDL_image Error: %s\n", imagePath.c_str(), IMG_GetError() );
-        return;
-    }
-    SDL_BlitSurface( optimizedSurface, NULL, sdlSurface, NULL );
-    //Get rid of old loaded surface
-    SDL_FreeSurface( loadedSurface );
-    SDL_UpdateWindowSurface( sdlWindow );
+    SDL_Texture* newTexture = TextureFactory::CreateTexture(imagePath);
+
+    SDL_RenderClear(windowRenderer);
+    SDL_RenderCopy(windowRenderer, newTexture, NULL, NULL);
+    SDL_RenderPresent(windowRenderer);
+//  SDL_UpdateWindowSurface( sdlWindow );
 }

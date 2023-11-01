@@ -20,7 +20,7 @@ void DebugLog::LogFailure(TPrint... printArgs) {
         std::cout << printArg;
         std::cout << ' ' << std::flush;
     }
-    std::cout << '\n' << std::flush; // on second thought,
-                                    // this clang-tidy rule might be
-                                    // completely useless
+    std::cout << std::endl;
+
+
 }

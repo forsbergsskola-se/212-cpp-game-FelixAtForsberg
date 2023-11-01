@@ -7,11 +7,11 @@
     <inspection_tool class="ArrayIndexOutOfBounds" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
     </inspection_tool>
-    <inspection_tool class="ClangTidy" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="ClangTidy" enabled="true" level="WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES">
       <scope name="Project Files" level="WARNING" enabled="true">
-        <option name="clangTidyChecks" value="-*,mpi-*,cert-err52-cpp,cert-err60-cpp,cert-err34-c,cert-str34-c,cert-dcl21-cpp,cert-msc50-cpp,cert-oop58-cpp,cert-dcl50-cpp,cert-oop57-cpp,cert-msc51-cpp,cert-dcl58-cpp,cert-flp30-c,google-default-arguments,google-runtime-operator,google-explicit-constructor,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,hicpp-exception-baseclass,openmp-use-default-none,portability-*,-portability-restrict-system-includes,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*" />
+        <option name="clangTidyChecks" value="-*,mpi-*,cert-err52-cpp,cert-err60-cpp,cert-err34-c,cert-str34-c,cert-dcl21-cpp,cert-msc50-cpp,cert-oop58-cpp,cert-dcl50-cpp,cert-oop57-cpp,cert-msc51-cpp,cert-dcl58-cpp,cert-flp30-c,google-default-arguments,google-runtime-operator,google-explicit-constructor,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,hicpp-exception-baseclass,openmp-use-default-none,portability-*,-portability-restrict-system-includes,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*,-misc-include-cleaner,-readability-identifier-length,-modernize-use-trailing-return-type,-performance-avoid-endl,-readability-implicit-bool-conversion" />
       </scope>
-      <option name="clangTidyChecks" value="-*,mpi-*,cert-err52-cpp,cert-err60-cpp,cert-err34-c,cert-str34-c,cert-dcl21-cpp,cert-msc50-cpp,cert-oop58-cpp,cert-dcl50-cpp,cert-oop57-cpp,cert-msc51-cpp,cert-dcl58-cpp,cert-flp30-c,google-default-arguments,google-runtime-operator,google-explicit-constructor,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,hicpp-exception-baseclass,openmp-use-default-none,portability-*,-portability-restrict-system-includes,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,misc-*,modernize-*,performance-*,readability-*" />
+      <option name="clangTidyChecks" value="-*,-portability-restrict-system-includes,bugprone-*,-bugprone-suspicious-include,cert-dcl21-cpp,cert-dcl50-cpp,cert-dcl58-cpp,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cert-oop57-cpp,cert-oop58-cpp,cert-str34-c,clang-analyzer-*,cppcoreguidelines-*,google-default-arguments,google-explicit-constructor,google-runtime-operator,hicpp-exception-baseclass,hicpp-multiway-paths-covered,hicpp-undelegated-constructor,misc-*,modernize-*,mpi-*,openmp-use-default-none,performance-*,portability-*,readability-*" />
     </inspection_tool>
     <inspection_tool class="ClangdErrorsAndWarnings" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
@@ -71,25 +71,25 @@
       <scope name="Project Files" level="TEXT ATTRIBUTES" enabled="true" />
     </inspection_tool>
     <inspection_tool class="OCUnusedConcept" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="OCUnusedGlobalDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="OCUnusedIncludeDirective" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
     </inspection_tool>
     <inspection_tool class="OCUnusedMacro" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="OCUnusedStruct" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="OCUnusedTemplateParameter" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="OCUnusedTypeAlias" enabled="true" level="WARNING" enabled_by_default="true">
-      <scope name="Project Files" level="WARNING" enabled="true" />
+      <scope name="Project Files" level="WARNING" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="PreprocessorComment" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
