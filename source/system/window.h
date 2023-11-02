@@ -1,12 +1,23 @@
 #pragma once
 
+#include "../graphics/texture.h"
+
 class Window {
-    SDL_Window*   sdlWindow;
-    SDL_Renderer* windowRenderer;
-    SDL_Surface*  windowSurface;
+    SDL_Window*      sdlWindow;
+    SDL_Renderer*    windowRenderer;
+    SDL_Surface*     windowSurface;
+    SDL_PixelFormat* windowFormat;
+
+//    void LoadImage(std::string& imagePath, SDL_PixelFormat* format);
 
 public:
     Window();
     ~Window();
-    void SetWindowImage(std::string& imagePath);
+
+    static constexpr int SCREEN_WIDTH = 640;
+    static constexpr int SCREEN_HEIGHT = 480;
+
+    void LoadImage(std::string& imagePath);
+
+    void RenderTexture(Texture& texture);
 };

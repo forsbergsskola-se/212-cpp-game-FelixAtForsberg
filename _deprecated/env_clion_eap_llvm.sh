@@ -10,7 +10,7 @@ export PATH=/usr/local/opt/llvm/bin:$PATH
 export PATH=/usr/local/Cellar/cmake/3.27.7/bin:$PATH
 export PATH=/usr/local/Cellar/llvm/17.0.3/lib/c++/:$PATH
 #export PATH=/Users/felixberge/Downloads/SDL2.framework:$PATH
-#export PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib:$PATH
+  #export PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib:$PATH
 
 
 # Read by compilers, linkers?

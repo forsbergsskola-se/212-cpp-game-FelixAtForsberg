@@ -2,13 +2,13 @@ https://www.libsdl.org/release/
 
 ---
 Fix:
-initialize `TextureFactory::renderer`
-           `TextureFactory::format` 
+initialize `Texture::renderer`
+           `Texture::format` 
 
 Problem:
-  "TextureFactory::renderer", referenced from:
-      TextureFactory::CreateSurface(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
-      TextureFactory::CreateTexture(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
+  "Texture::renderer", referenced from:
+      Texture::CreateSurface(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
+      Texture::CreateTexture(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in texture_factory.cpp.o
       Window::SetWindowImage(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >&) in window.cpp.o
 ld: symbol(s) not found for architecture x86_64
 
