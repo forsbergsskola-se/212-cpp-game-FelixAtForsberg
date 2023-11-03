@@ -1,6 +1,12 @@
 https://www.libsdl.org/release/
 
 ---
+CMake Project Examples:
+https://github.com/marczaku/cpp-103/tree/main/solution
+https://invent.kde.org/graphics/krita
+https://projects.blender.org/blender/blender
+
+---
 Fix:
 initialize `Texture::renderer`
            `Texture::format` 
