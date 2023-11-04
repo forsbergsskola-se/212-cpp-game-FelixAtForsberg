@@ -1,29 +1,31 @@
 cmake_minimum_required(VERSION 3.26)
 
-# ===============================================
-# =============== Game Executable - Target from source files
-
-file(GLOB_RECURSE GAME_SOURCE_FILES "*.cpp" "*.h")
-
-conditionally_log_files(${GAME_LOG_SOURCE_FILES} "GAME SOURCE FILES:" "${GAME_SOURCE_FILES}")
-
-# Create game executable target
-add_executable(
-#    ${GAME_EXECUTABLE} MACOSX_BUNDLE OBJECT $<TARGET_OBJECTS:${GAME_LIBRARY}}>
-    ${GAME_EXECUTABLE} MACOSX_BUNDLE ${GAME_SOURCE_FILES}
-)
-
 
 # ===============================================
 # =============== Game Library - For linking tests to game functions
 
-# use game files without main.cpp
-set(GAME_LIBRARY_SOURCE_FILES ${GAME_SOURCE_FILES})
+file(GLOB_RECURSE GAME_LIBRARY_SOURCE_FILES "*.cpp" "*.h")
+# use game files without entry point (main.cpp)
 list(FILTER GAME_LIBRARY_SOURCE_FILES EXCLUDE REGEX ".*\\main.cpp$") # remove main.cpp
 
 conditionally_log_files(${GAME_LIBRARY_LOG_SOURCE_FILES} "GAME LIBRARY FILES:" "${GAME_LIBRARY_SOURCE_FILES}")
 
-add_library(${GAME_LIBRARY} ${GAME_LIBRARY_SOURCE_FILES})
+add_library(${GAME_LIBRARY} OBJECT ${GAME_LIBRARY_SOURCE_FILES})
+
+# ===============================================
+# =============== Game Executable - Reuse library and link to executable
+
+
+# add main.cpp and reuse object files built from source files
+set(GAME_SOURCE_FILES main.cpp $<TARGET_OBJECTS:${GAME_LIBRARY}>)
+conditionally_log_files(${GAME_LOG_SOURCE_FILES} "GAME SOURCE FILES:" "${GAME_SOURCE_FILES}")
+
+# Create game executable target
+add_executable(
+    ${GAME_EXECUTABLE} MACOSX_BUNDLE ${GAME_SOURCE_FILES}
+)
+
+
 
 # ===============================================
 # =============== SDL2 - Link to Game Executable + Library
