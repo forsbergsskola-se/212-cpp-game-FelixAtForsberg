@@ -9,4 +9,4 @@ namespace SDLGame {
         bool Exist(std::string& imagePath);
     };
 
-} // sdlGame
+}
