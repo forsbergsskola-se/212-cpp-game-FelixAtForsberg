@@ -2,22 +2,25 @@
 
 #include "../graphics/texture.h"
 
-class Window {
-    SDL_Window*      sdlWindow;
-    SDL_Renderer*    windowRenderer;
-    SDL_Surface*     windowSurface;
-    SDL_PixelFormat* windowFormat;
+namespace SDLGame {
 
-//    void LoadImage(std::string& imagePath, SDL_PixelFormat* format);
+    class Window {
+        SDL_Window*      sdlWindow;
+        SDL_Renderer*    windowRenderer;
+        SDL_Surface*     windowSurface;
+        SDL_PixelFormat* windowFormat;
 
-public:
-    Window();
-    ~Window();
+    //    void LoadImage(std::string& imagePath, SDL_PixelFormat* format);
 
-    static constexpr int SCREEN_WIDTH = 640;
-    static constexpr int SCREEN_HEIGHT = 480;
+    public:
+        Window();
+        ~Window();
 
-    void LoadImage(std::string& imagePath);
+        static constexpr int SCREEN_WIDTH = 640;
+        static constexpr int SCREEN_HEIGHT = 480;
 
-    void RenderTexture(Texture& texture);
-};
+        void LoadImage(std::string& imagePath);
+
+        void RenderTexture(Texture& texture);
+    };
+}

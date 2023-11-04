@@ -4,18 +4,18 @@
 #include <string>
 #include <filesystem>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <SDL2_image/SDL_image.h>
 
 #include "system/window.h"
 #include "graphics/texture.h"
 #include "system/debug_log.h"
 
+using namespace SDLGame;
+
 namespace fs = std::filesystem;
 
 //#include <SDL2_ttf/SDL_ttf.h>
-
-//Loads individual image as texture
 
 int main( int argc, char* args[] )
 {

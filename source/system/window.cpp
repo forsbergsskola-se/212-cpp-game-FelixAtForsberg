@@ -11,6 +11,8 @@
 #include "../graphics/texture.h"
 #include "debug_log.h"
 
+using namespace SDLGame;
+
 //Screen dimension constants
 
 //constexpr SDL_WindowFlags INITIAL_WINDOW_FLAGS = SDL_WINDOW_INPUT_FOCUS;
@@ -42,12 +44,12 @@ Window::Window() {
             );
 
     if (sdlWindow == nullptr) {
-        DebugLog::LogWithSDLError( "Window could not be created!");
+        DebugLog::LogWithSDLError("window could not be created!");
     }
 
     windowRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_SOFTWARE);
     if (windowRenderer == nullptr) {
-        DebugLog::LogWithSDLError( "Could not create a renderer");
+        DebugLog::LogWithSDLError("Could not create a renderer");
     }
 
     SDL_SetRenderDrawColor(windowRenderer, 0xff, 0xff , 0xff, 0xff);
@@ -55,7 +57,7 @@ Window::Window() {
 
     windowSurface = SDL_GetWindowSurface(sdlWindow);
     if (windowSurface == nullptr) {
-        DebugLog::LogWithSDLError( "Could not retrieve window surface");
+        DebugLog::LogWithSDLError("Could not retrieve window surface");
     }
 
 //    windowFormat = SDL_GetWindowPixelFormat(sdlWindow);
@@ -67,7 +69,7 @@ Window::Window() {
 
 Window::~Window()
 {
-    std::cout << "Window was destroyed";
+    std::cout << "window was destroyed";
 	//Destroy window
 	SDL_DestroyRenderer(windowRenderer );
 	SDL_DestroyWindow( sdlWindow );
@@ -79,7 +81,7 @@ Window::~Window()
 	SDL_Quit();
 }
 
-//void Window::LoadImage(std::string &imagePath, SDL_PixelFormat format) {
+//void window::LoadImage(std::string &imagePath, SDL_PixelFormat format) {
 //}
 
 void Window::RenderTexture(Texture& texture) {
@@ -94,6 +96,8 @@ void Window::RenderTexture(Texture& texture) {
                    texture.sdlTexture,
                    &srcRect,
                    &dstRect);
+
+    SDL_RenderPresent(windowRenderer);
 
 }
 

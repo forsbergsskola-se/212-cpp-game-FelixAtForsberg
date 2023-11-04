@@ -1,19 +1,13 @@
 #pragma once
 #include <iostream>
+#include <SDL.h>
+//#include <SDL2/SDL.h>
 
 //  ostream: basic_ostream<char>
 // wostream: basic_ostream<wchar_t>
-
-class DebugLog {
-
-public:
-
-//    template<typename... TPrint>
-//    static void LogFailure(TPrint... printArgs) {
-//
-//        ExpandArgsToStream()
-//            std::cout << std::endl;
-//    }
+namespace SDLGame {
+    class DebugLog {
+    public:
 
     template<typename... TPrint>
     static void Log(TPrint... printArgs) {
@@ -30,3 +24,8 @@ public:
         std::cout << "SDL Error: \n" << SDL_GetError() << std::endl;
     }
 };
+
+}
+
+
+
