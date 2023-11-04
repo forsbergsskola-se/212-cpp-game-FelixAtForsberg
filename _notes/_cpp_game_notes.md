@@ -1,10 +1,63 @@
 https://www.libsdl.org/release/
 
 ---
+
+
+
+---
+
+Fix:
+    Correct casing in path to real filename 
+    "system/Window.h" -> "system/window.h"
+
+Problem:
+
+/Users/felixberge/Projects/ C++/212-cpp-game-FelixAtForsberg/tests/test_window.cpp:2:10: warning: non-portable path to file '"system/window.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include "system/Window.h"
+---
+
+FIX: 
+Same signature
+
+after:
+target_link_libraries( ${TEST_EXECUTABLE} PRIVATE GTest::gtest_main )
+
+                
+before :
+target_link_libraries( ${TEST_EXECUTABLE} GTest::gtest_main )
+
+
+Problem:
+
+CMake Error at tests/CMakeLists.txt:30 (target_link_libraries):
+  The keyword signature for target_link_libraries has already been used with
+  the target "SDLGameProject_tests".  All uses of target_link_libraries with
+  a target must be either all-keyword or all-plain.
+
+---
 CMake Project Examples:
+CMake CPP-103
 https://github.com/marczaku/cpp-103/tree/main/solution
+    
+https://github.com/marczaku/cpp-103/blob/main/solution/CMakeLists.txt
+https://github.com/marczaku/cpp-103/blob/main/solution/src/class_library/CMakeLists.txt
+https://github.com/marczaku/cpp-103/blob/main/solution/src/CMakeLists.txt
+https://github.com/marczaku/cpp-103/blob/main/solution/src/CMakeLists.txt
+https://github.com/marczaku/cpp-103/blob/main/solution/tests/class_library_tests/CMakeLists.txt
+https://github.com/marczaku/cpp-103/blob/main/solution/tests/CMakeLists.txt
+
+
+CMake CPP-103CPP Tests.cpp:
+https://github.com/marczaku/cpp-103/blob/main/solution/tests/class_library_tests/vector3_test.cpp
+
+
+
+CMake - Krita:
 https://invent.kde.org/graphics/krita
+
+CMake - Blender
 https://projects.blender.org/blender/blender
+https://projects.blender.org/blender/blender/src/branch/main/source/CMakeLists.txt
 
 ---
 Fix:
