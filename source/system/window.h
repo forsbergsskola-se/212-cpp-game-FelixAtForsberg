@@ -19,7 +19,7 @@ namespace SDLGame {
         static constexpr int SCREEN_WIDTH = 640;
         static constexpr int SCREEN_HEIGHT = 480;
 
-        void LoadImage(std::string& imagePath);
+        Texture LoadImage(std::string& imagePath);
 
         void RenderTexture(Texture& texture);
     };

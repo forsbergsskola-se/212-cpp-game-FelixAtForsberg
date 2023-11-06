@@ -64,6 +64,7 @@ Window::Window() {
 
 //    Initialize renderer color
     SDL_SetRenderDrawColor( windowRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+    
 
 }
 
@@ -87,10 +88,10 @@ Window::~Window()
 void Window::RenderTexture(Texture& texture) {
 
     SDL_RenderClear(windowRenderer);
-    SDL_SetRenderDrawColor(windowRenderer, 0xff, 0xff , 0xff, 0xff);
+    SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF , 0xFF, 0xFF);
 
-    SDL_Rect srcRect = {0, 0, 100, 100};
-    SDL_Rect dstRect = {0, 0, 100, 100};
+    SDL_Rect srcRect = {0, 0, 400, 400};
+    SDL_Rect dstRect = {0, 0, 400, 400};
 
     int result = SDL_RenderCopy(windowRenderer,
                    texture.sdlTexture,
@@ -101,10 +102,11 @@ void Window::RenderTexture(Texture& texture) {
 
 }
 
-void Window::LoadImage(std::string &imagePath)
+Texture Window::LoadImage(std::string &imagePath)
 {
 
-    Texture newTexture = Texture(windowRenderer, imagePath);
+    const Texture newTexture = Texture(windowRenderer, imagePath);
+    return newTexture;
 
 //    LoadImage(imagePath, windowSurface->format);
 }

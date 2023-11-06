@@ -1,20 +1,35 @@
 #include <SDL2/SDL.h>
-#include <string>
 #include <SDL2_image/SDL_image.h>
+#include <string>
+
 #include "texture.h"
+#include "../system/files/file.h"
+#include "../system/files/file_image.h"
 
 using namespace SDLGame;
+using SDLGame::Texture,
+      System::File,
+      System::Image,
+      std::string;
 
 Texture::Texture(SDL_Renderer* renderer, std::string& imagePath)  {
 
+    const Image imgFile(imagePath);
+
+    if (!imgFile.exists) {
+        // Make string because one template argument cannot be 2 different types
+        DebugLog::LogError("Attempted to create texture with non-existent path: ", imagePath);
+    }
     sdlTexture = IMG_LoadTexture(renderer, imagePath.c_str());
 
     if (sdlTexture == nullptr) {
         DebugLog::LogWithSDLError(std::string("Unable to load image:"), imagePath);
     }
 
+    sourceHeight = imgFile.height;
+    sourceWidth = imgFile.width;
 //    SDL_QueryT
-    const SDL_Rect textureRect {0, 0, 100, 100};
+
 //    const SDL_Rect rect {0, 0,  100, 100};
 }
 

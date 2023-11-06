@@ -62,7 +62,7 @@ function (conditionally_log_files ARG_CONDITION ARG_TITLE ARG_FILE_LIST)
         message(NOTICE "=================================================")
         message(NOTICE "${FILE_LIST_LENGTH} - ${ARG_TITLE}")
         foreach(FILE ${ARG_FILE_LIST})
-            message(NOTICE "\"" ${FILE} "\"")
+            message(NOTICE "\"" "${FILE}" "\"")
         endforeach()
         message(NOTICE "=================================================\n")
 

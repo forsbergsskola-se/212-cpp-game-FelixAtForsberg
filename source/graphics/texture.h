@@ -3,10 +3,9 @@
 #include <filesystem>
 #include "../system/debug_log.h"
 
-namespace fs = std::filesystem;
 
 namespace SDLGame {
-        class Texture {
+    class Texture {
     //    Texture(SDL_Renderer *renderer, std::string &imagePath);
 
     //    SDL_Surface*     CreateSurface(std::string& imagePath );
@@ -17,10 +16,13 @@ namespace SDLGame {
 
     public:
         SDL_Texture*     sdlTexture;
+        int sourceWidth;
+        int sourceHeight;
 
     //    Texture(SDL_Renderer* renderer, SDL_PixelFormat* format, std::string& imagePath);
         Texture(SDL_Renderer* renderer, std::string& imagePath);
 
+        Texture() = default;
     };
 };
 

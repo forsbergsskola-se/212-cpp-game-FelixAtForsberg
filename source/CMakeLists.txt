@@ -25,8 +25,6 @@ add_executable(
     ${GAME_EXECUTABLE} MACOSX_BUNDLE ${GAME_SOURCE_FILES}
 )
 
-
-
 # ===============================================
 # =============== SDL2 - Link to Game Executable + Library
 
@@ -34,7 +32,7 @@ add_executable(
 if(TARGET SDL2::SDL2main)
     # It has an implicit dependency on SDL2 functions, so it MUST be added before SDL2::SDL2 (or SDL2::SDL2-static)
     target_link_libraries( ${GAME_EXECUTABLE} PRIVATE SDL2::SDL2main)
-    target_link_libraries( ${GAME_LIBRARY} PRIVATE SDL2::SDL2main)
+    target_link_libraries( ${GAME_LIBRARY}    PRIVATE SDL2::SDL2main)
 endif()
 
 # Link to the actual SDL2 library. SDL2::SDL2 is the shared SDL library, SDL2::SDL2-static is the static SDL libarary.

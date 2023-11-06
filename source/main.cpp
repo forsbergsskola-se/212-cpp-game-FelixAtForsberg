@@ -27,12 +27,14 @@ int main( int argc, char* args[] )
     const fs::path curWorkDir = fs::current_path();
     std::cout << "From " << curWorkDir  << std::endl;
 
-
-
     std::string fullPath = (fs::current_path() / imagePath).string();
     DebugLog::Log(std::string("Full path:"), fullPath);
 
-    window->LoadImage(fullPath);
+    Texture newTexture{};
+
+    newTexture = window->LoadImage(fullPath);
+
+    window->RenderTexture(newTexture);
 
 //    Texture texture = Texture(fullPath,  );
 //    window

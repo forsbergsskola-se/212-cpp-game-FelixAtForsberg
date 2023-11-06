@@ -36,7 +36,7 @@ typedef struct SDL_Rect
  * \param renderer the rendering context
  * \param texture the source texture
  * \param srcrect the source SDL_Rect structure or NULL for the entire texture
- * \param dstrect the destination SDL_Rect structure or NULL for the entire
+ * \param dstrect the destination SDL_Rect structure or NULL for the entire¡
  *                rendering target; the texture will be stretched to fill the
  *                given rectangle
  * \returns 0 on success or a negative error code on failure; call
