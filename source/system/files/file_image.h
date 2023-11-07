@@ -6,8 +6,6 @@
 
 #define LOG_FILE_IMAGE_CTOR
 
-using std::string;
-
 namespace SDLGame::System {
 
     constexpr size_t PNG_OFFSET_WIDTH  {0x10};
@@ -19,22 +17,22 @@ namespace SDLGame::System {
 
     enum struct IMAGE_TYPE {
         PNG,
-        JPG,
         INVALID
+//        JPG,
     };
 
     // http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
     // https://www.w3.org/TR/PNG-Chunks.html
 
 
-        class Image : SDLGame::System::File {
+        class Image : public SDLGame::System::File {
 
         public:
 
-            Image(string& imagePath);
+            explicit Image(std::string& imagePath);
 
             IMAGE_TYPE imageType;
-            bool exists;
+
             int height;
             int width;
             SDL_Rect rect;

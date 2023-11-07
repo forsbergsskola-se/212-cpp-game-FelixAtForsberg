@@ -25,7 +25,7 @@ SDLGame::System::Image::Image(string &imagePath) : SDLGame::System::File(imagePa
         std::cout << "IMAGE TYPE: PNG" << std::endl;
 #endif
 
-        bool wrongEndian;
+        bool wrongEndian {false};
 
         // we portable af
         if constexpr (std::endian::native == std::endian::little) {

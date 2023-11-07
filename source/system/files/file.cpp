@@ -9,7 +9,6 @@ namespace fs = std::filesystem;
 
 using std::string, std::ifstream;
 
-File::File(string &fromPath)
-    : fileStream(fromPath, std::ios::binary),
+File::File(string &fromPath) : fileStream(fromPath, std::ios::binary),
       exists(fileStream.good()) {
 }
