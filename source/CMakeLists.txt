@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.26)
 # ===============================================
 # =============== Game Library - For linking tests to game functions
 
-file(GLOB_RECURSE GAME_LIBRARY_SOURCE_FILES "*.cpp" "*.h")
+file(GLOB_RECURSE GAME_LIBRARY_SOURCE_FILES "*.cpp" "*.h" "*.inl")
 # use game files without entry point (main.cpp)
 list(FILTER GAME_LIBRARY_SOURCE_FILES EXCLUDE REGEX ".*\\main.cpp$") # remove main.cpp
 

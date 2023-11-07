@@ -26,11 +26,10 @@ Texture::Texture(SDL_Renderer* renderer, std::string& imagePath)  {
         DebugLog::LogWithSDLError(std::string("Unable to load image:"), imagePath);
     }
 
-    sourceHeight = imgFile.height;
     sourceWidth = imgFile.width;
-//    SDL_QueryT
+    sourceHeight = imgFile.height;
 
-//    const SDL_Rect rect {0, 0,  100, 100};
+    nativeRect = {0, 0,  sourceWidth, sourceHeight};
 }
 
 

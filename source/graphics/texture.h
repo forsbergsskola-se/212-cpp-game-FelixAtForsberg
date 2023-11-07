@@ -18,6 +18,7 @@ namespace SDLGame {
         SDL_Texture*     sdlTexture;
         int sourceWidth;
         int sourceHeight;
+        SDL_Rect nativeRect;
 
     //    Texture(SDL_Renderer* renderer, SDL_PixelFormat* format, std::string& imagePath);
         Texture(SDL_Renderer* renderer, std::string& imagePath);

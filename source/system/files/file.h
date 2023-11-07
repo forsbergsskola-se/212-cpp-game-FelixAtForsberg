@@ -1,23 +1,24 @@
 #pragma once
+
 #include <string>
 #include <array>
 #include <fstream>
 
-// https://www.w3.org/TR/PNG-Chunks.html
-
-using std::string;
-
 namespace SDLGame::System {
+
+//void ConvertEndian(const std::array<T, N>& arr);
 
     class File {
     protected:
         std::basic_ifstream<char> fileStream;
 
     public:
-        File(string& fromPath);
-
+        File(std::string &fromPath);
 
         bool exists;
     };
-
 }
+// having to do this song and dance for
+// basically somewhat approaching
+// declaration separation is very sad
+#include "convert_endian.inl"

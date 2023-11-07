@@ -90,12 +90,12 @@ void Window::RenderTexture(Texture& texture) {
     SDL_RenderClear(windowRenderer);
     SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF , 0xFF, 0xFF);
 
-    SDL_Rect srcRect = {0, 0, 400, 400};
-    SDL_Rect dstRect = {0, 0, 400, 400};
+    SDL_Rect srcRect = {0, 0, 640, 480};
+    SDL_Rect dstRect = {0, 0, 200, 100};
 
     int result = SDL_RenderCopy(windowRenderer,
                    texture.sdlTexture,
-                   &srcRect,
+                   &texture.nativeRect,
                    &dstRect);
 
     SDL_RenderPresent(windowRenderer);
