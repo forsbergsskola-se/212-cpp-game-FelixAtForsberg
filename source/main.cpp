@@ -23,7 +23,8 @@ int main( int argc, char* args[] )
     Window* window = new Window();
 
     std::string imagePath = fs::path("resources/texture.png" );
-    std::cout << "Looking for resource at " << imagePath << std::endl;
+//    std::cout << "Looking for resource at " << imagePath << std::endl;
+    DebugLog::Log("Looking for resource at: ", imagePath);
     const fs::path curWorkDir = fs::current_path();
     std::cout << "From " << curWorkDir  << std::endl;
 
