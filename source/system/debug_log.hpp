@@ -54,6 +54,12 @@ namespace SDLGame {
 
         }
 
+//        template<typename... TPrint>
+//        static void LogEvalMember(TPrint&&... printArgs) {
+
+//        }
+
+
         template<typename... TPrint>
         static void LogSuccess(TPrint&&... printArgs) {
             LogEscPrefix(FG["GREEN"], printArgs...);
