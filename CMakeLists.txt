@@ -12,6 +12,9 @@ set(GAME_LIBRARY_LOG_SOURCE_FILES ON CACHE BOOL "Print game library source files
 set(TEST_LOG_SOURCE_FILES         ON CACHE BOOL "Print test source files")
 
 
+set(USE_VENDORED_SDL2          ON CACHE BOOL "Prefer vendored SDL2" FORCE)
+
+
 # "INTERNAL": Don't show in CMakeGUI & always override (implies FORCE)
 set(GAME_EXECUTABLE     "SDLGame"      CACHE INTERNAL "Name the game executable and respective targets will use")
 set(GAME_LIBRARY        "SDLGame_lib"  CACHE INTERNAL "Name the game library and respective targets will use")
@@ -45,9 +48,15 @@ endif()
 
 # https://wiki.libsdl.org/SDL2/Installation
 # https://wiki.libsdl.org/SDL2/README/cmake
-
+if (USE_VENDORED_SDL2)
+find_package(SDL2       REQUIRED CONFIG REQUIRED COMPONENTS SDL2       PATHS "vendored/" NO_DEFAULT_PATH)
+find_package(SDL2_image REQUIRED CONFIG REQUIRED COMPONENTS SDL2_image PATHS "vendored/" NO_DEFAULT_PATH)
+find_package(SDL2_ttf   REQUIRED CONFIG REQUIRED COMPONENTS SDL2_ttf   PATHS "vendored/" NO_DEFAULT_PATH)
+else()
 find_package(SDL2       REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 find_package(SDL2_image REQUIRED CONFIG REQUIRED COMPONENTS SDL2_image)
+find_package(SDL2_ttf   REQUIRED CONFIG REQUIRED COMPONENTS SDL2_ttf)
+endif()
 
 # ===============================================
 # =============== Utility Logging Function

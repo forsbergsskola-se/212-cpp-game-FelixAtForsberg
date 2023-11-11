@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
 
-
 # ===============================================
 # =============== Game Library - For linking tests to game functions
 
@@ -36,8 +35,8 @@ if(TARGET SDL2::SDL2main)
 endif()
 
 # Link to the actual SDL2 library. SDL2::SDL2 is the shared SDL library, SDL2::SDL2-static is the static SDL libarary.
-target_link_libraries( ${GAME_EXECUTABLE} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image)
-target_link_libraries( ${GAME_LIBRARY}    PRIVATE SDL2::SDL2 SDL2_image::SDL2_image)
+target_link_libraries( ${GAME_EXECUTABLE} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)
+target_link_libraries( ${GAME_LIBRARY}    PRIVATE SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)
 
 # ===============================================
 # =============== Copy '/assets/' from /source/assets to 'app'/Contents/
