@@ -9,7 +9,7 @@
 
 #include "system/window.h"
 #include "graphics/texture.h"
-#include "system/debug_log.h"
+#include "system/debug_log.hpp"
 
 using namespace SDLGame;
 
@@ -17,47 +17,23 @@ namespace fs = std::filesystem;
 
 //#include <SDL2_ttf/SDL_ttf.h>
 
-int main( int argc, char* args[] )
+int main()
 {
 
     Window* window = new Window();
 
-    std::string imagePath = fs::path("resources/texture.png" );
-//    std::cout << "Looking for resource at " << imagePath << std::endl;
-    DebugLog::Log("Looking for resource at: ", imagePath);
-    const fs::path curWorkDir = fs::current_path();
-    std::cout << "From " << curWorkDir  << std::endl;
-
-    std::string fullPath = (fs::current_path() / imagePath).string();
-    DebugLog::Log(std::string("Full path:"), fullPath);
-
-    Texture newTexture{};
-
-    newTexture = window->LoadImage(fullPath);
-
+    auto newTexture = window->CreateTexture("texture.png");
     window->RenderTexture(newTexture);
 
-//    Texture texture = Texture(fullPath,  );
-//    window
-
-    // when you have support for textures
-    // TODO 3: add support for game objects (textures and positions and sizes)
-    // TODO 4: maybe add a scene class (that holds and renders all game objects)
-    // TODO 5: see, if you can make it that you can move two images separately using buttons, e.g. arrow keys and WASD
-
-    //Main loop flag
     bool quit = false;
 
-    //Event handler
     SDL_Event e;
 
     //While application is running
     while( !quit )
     {
-        //Handle events on queue
         while( SDL_PollEvent( &e ) != 0 )
         {
-            //User requests quit
             if( e.type == SDL_QUIT )
             {
                 quit = true;

@@ -9,7 +9,7 @@
 
 #include "window.h"
 #include "../graphics/texture.h"
-#include "debug_log.h"
+#include "debug_log.hpp"
 
 using namespace SDLGame;
 
@@ -82,10 +82,13 @@ Window::~Window()
 	SDL_Quit();
 }
 
-//void window::LoadImage(std::string &imagePath, SDL_PixelFormat format) {
-//}
+Texture Window::CreateTexture(const std::filesystem::path& imageName)
+{
+    const Texture newTexture = Texture(windowRenderer, imageName);
+    return newTexture;
+}
 
-void Window::RenderTexture(Texture& texture) {
+void Window::RenderTexture(const Texture& texture) {
 
     SDL_RenderClear(windowRenderer);
     SDL_SetRenderDrawColor(windowRenderer, 0xFF, 0xFF , 0xFF, 0xFF);
@@ -93,20 +96,12 @@ void Window::RenderTexture(Texture& texture) {
     SDL_Rect srcRect = {0, 0, 640, 480};
     SDL_Rect dstRect = {0, 0, 200, 100};
 
-    int result = SDL_RenderCopy(windowRenderer,
+    SDL_RenderCopy(windowRenderer,
                    texture.sdlTexture,
-                   &texture.nativeRect,
+                   &texture.sourceRect,
                    &dstRect);
 
     SDL_RenderPresent(windowRenderer);
 
 }
 
-Texture Window::LoadImage(std::string &imagePath)
-{
-
-    const Texture newTexture = Texture(windowRenderer, imagePath);
-    return newTexture;
-
-//    LoadImage(imagePath, windowSurface->format);
-}

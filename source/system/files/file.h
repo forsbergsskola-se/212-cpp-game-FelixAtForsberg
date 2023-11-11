@@ -9,16 +9,19 @@ namespace SDLGame::System {
 //void ConvertEndian(const std::array<T, N>& arr);
 
     class File {
-    protected:
-        std::basic_ifstream<char> fileStream;
+
 
     public:
-        File(std::string &fromPath);
+        File() = delete;
+
+        std::basic_ifstream<char> fileStream;
+
+        explicit File(const std::filesystem::path& path);
 
         bool exists;
     };
 }
 // having to do this song and dance for
 // basically somewhat approaching
-// declaration separation is very sad
+// declaration separation is quite sad
 #include "convert_endian.inl"

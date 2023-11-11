@@ -1,6 +1,6 @@
 #pragma once
 
-#define LOG_ENDIAN_CONVERSION
+//#define LOG_ENDIAN_CONVERSION
 
 #include <iostream>
 

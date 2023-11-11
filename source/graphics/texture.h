@@ -1,29 +1,21 @@
 #pragma once
 #include <string>
 #include <filesystem>
-#include "../system/debug_log.h"
+#include "../system/debug_log.hpp"
 
+#define LOG_TEXTURE
 
 namespace SDLGame {
     class Texture {
-    //    Texture(SDL_Renderer *renderer, std::string &imagePath);
-
-    //    SDL_Surface*     CreateSurface(std::string& imagePath );
-    //    SDL_Texture*     CreateTexture(std::string& imagePath);
-    //    SDL_PixelFormat* sdlFormat;
-
-        SDL_Renderer*    sdlRenderer;
+        int             sourceWidth;
+        int             sourceHeight;
 
     public:
-        SDL_Texture*     sdlTexture;
-        int sourceWidth;
-        int sourceHeight;
-        SDL_Rect nativeRect;
 
-    //    Texture(SDL_Renderer* renderer, SDL_PixelFormat* format, std::string& imagePath);
-        Texture(SDL_Renderer* renderer, std::string& imagePath);
+        Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath);
 
-        Texture() = default;
+        SDL_Rect        sourceRect;
+        SDL_Texture*    sdlTexture;
     };
 };
 

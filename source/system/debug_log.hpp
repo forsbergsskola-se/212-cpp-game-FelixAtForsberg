@@ -20,6 +20,7 @@ namespace CON {
     {
         {"RED",   "31m"},
         {"GREEN", "32m"},
+        {"YELLOW", "33m"},
     };
 
     static std::unordered_map<std::string, std::string> TEXT =
@@ -41,44 +42,59 @@ using namespace CON;
 namespace SDLGame {
     struct DebugLog {
 
+    private:
+        template<typename... TPrint>
+        static void Pipe(std::ostream& stream, TPrint&&... printArgs) {
+            (stream << ... << printArgs) << std::endl;
+        }
+
+        template<typename... TPrint>
+        static void PipeWithEscPrefix(std::ostream& stream, std::string prefix, TPrint&&... printArgs) {
+            stream << SET(prefix);
+            Pipe(stream, printArgs...);
+            stream << SET(TEXT["RESET"]);
+        }
+
+    public:
+
         template<typename... TPrint>
         static void Log(TPrint&&... printArgs) {
-            (std::cout << ... << printArgs) << std::endl;
+            Pipe(std::cout, printArgs...);
         }
 
         template<typename... TPrint>
-        static void LogEscPrefix(std::string prefix, TPrint&&... printArgs) {
-            std::cout << SET(prefix);
-            Log(printArgs...);
-            std::cout << SET(TEXT["RESET"]);
-
+        static void Error(TPrint&&... printArgs) {
+            Pipe(std::cerr, printArgs...);
         }
 
-//        template<typename... TPrint>
-//        static void LogEvalMember(TPrint&&... printArgs) {
 
-//        }
 
+
+        // Neutral + Good Logs
 
         template<typename... TPrint>
         static void LogSuccess(TPrint&&... printArgs) {
             LogEscPrefix(FG["GREEN"], printArgs...);
         }
 
+        // "Bad" Logs
+
+        template<typename... TPrint>
+        static void LogWarn(TPrint&&... printArgs) {
+            PipeWithEscPrefix(std::cerr, FG["YELLOW"], printArgs...);
+        }
 
         template<typename... TPrint>
         static void LogError(TPrint&&... printArgs) {
-            std::cout << SET( FG["RED"]);
-            (std::cout << ... << printArgs) << std::endl;
-            std::cout << SET(TEXT["RESET"]);
+            PipeWithEscPrefix(std::cerr, FG["RED"], printArgs...);
         }
-
 
         template<typename... TPrint>
         static void LogWithSDLError(TPrint&&... printArgs) {
-            Log(printArgs...);
-            std::cout << "SDL Error: \n" << SDL_GetError() << std::endl;
+            Error(printArgs...);
+            std::cerr << "SDL Error: \n" << SDL_GetError() << std::endl;
         }
+
     };
 
 }

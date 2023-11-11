@@ -18,7 +18,6 @@ namespace SDLGame::System {
     enum struct IMAGE_TYPE {
         PNG,
         INVALID
-//        JPG,
     };
 
     // http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html
@@ -28,14 +27,11 @@ namespace SDLGame::System {
         class Image : public SDLGame::System::File {
 
         public:
+            explicit Image(const std::filesystem::path& imagePath);
 
-            explicit Image(std::string& imagePath);
-
-            IMAGE_TYPE imageType;
-
+            IMAGE_TYPE type;
             int height;
             int width;
-            SDL_Rect rect;
         };
 
 }

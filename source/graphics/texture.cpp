@@ -1,10 +1,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <string>
+#include <filesystem>
 
 #include "texture.h"
 #include "../system/files/file.h"
 #include "../system/files/file_image.h"
+#include "../system/system_static.h"
 
 using namespace SDLGame;
 using SDLGame::Texture,
@@ -12,26 +14,38 @@ using SDLGame::Texture,
       System::Image,
       std::string;
 
-Texture::Texture(SDL_Renderer* renderer, std::string& imagePath)  {
+Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath)  {
 
-    const Image imgFile(imagePath);
+    const std::filesystem::path usableRelImagePath = System::AsRelAssetPath(imagePath);
+
+    const Image imgFile(usableRelImagePath);
 
     if (!imgFile.exists) {
-        // Make string because one template argument cannot be 2 different types
         DebugLog::LogError("Attempted to create texture with non-existent path: ", imagePath);
     }
-    sdlTexture = IMG_LoadTexture(renderer, imagePath.c_str());
+
+    this->sourceWidth  = imgFile.width;
+    this->sourceHeight = imgFile.height;
+
+//    SDL_Rect rect = {0, 0, imgFile.width, imgFile.height};
+    this->sourceRect = SDL_Rect {0,0,sourceWidth, sourceHeight};
+
+#ifdef LOG_TEXTURE
+    DebugLog::Log("Texture Constructor called.",
+                  "\n imagePath:       ", imagePath,
+                  "\n usableImagePath: ", usableRelImagePath,
+                  "\n sourceWidth, sourceHeight: ", sourceWidth, ",", sourceHeight,
+                  "\n sourceRect: "
+                  "(",sourceRect.w,",",sourceRect.h,",",sourceRect.x,",", sourceRect.y,")");
+#endif
+
+    sdlTexture = IMG_LoadTexture(renderer, System::AsRelAssetPath(imagePath).c_str());
+
 
     if (sdlTexture == nullptr) {
         DebugLog::LogWithSDLError(std::string("Unable to load image:"), imagePath);
     }
-
-    sourceWidth = imgFile.width;
-    sourceHeight = imgFile.height;
-
-    nativeRect = {0, 0,  sourceWidth, sourceHeight};
 }
-
 
 // TODO 2 Introduce your own texture Class to hold the texture
 // Constructor: (Assign <- or Load texture) Destructor: Free the texture
@@ -45,7 +59,7 @@ Texture::Texture(SDL_Renderer* renderer, std::string& imagePath)  {
 
 //    SDL_Surface* imgSurface = gtexture::CreateSurface(imagePath);
     // TODO 1: Create texture from Surface
-//    SDL_Texture* newTexture = SDL_CreateTextureFromSurface(sdlRenderer, imgSurface);
+//    SDL_Texture* newTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
 //    return newTexture;
 //}
 
