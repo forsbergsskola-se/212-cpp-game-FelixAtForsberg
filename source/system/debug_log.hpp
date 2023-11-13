@@ -6,6 +6,9 @@
 #include <SDL.h>
 //#include <SDL2/SDL.h>
 
+#define __STORE_CTOR_LINE__ constexpr unsigned int _ctor_start = (__LINE__);
+#define __CTOR_LINE__ (__LINE__ - _ctor_start)
+
 using std::string_view;
 
 //  ostream: basic_ostream<char>
