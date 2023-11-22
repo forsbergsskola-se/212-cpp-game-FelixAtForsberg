@@ -2,7 +2,7 @@
 #include <array>
 #include "game/entities/game_entity.h"
 #include "game/input/game_input.h"
-#include "graphics/render_context.h"
+#include "graphics/render_context.hpp"
 #include "system/event/events.h"
 
 
@@ -23,14 +23,15 @@ namespace SDLGame {
 
     public:
 
-        explicit Scene( RenderContext context );
-
-        std::array<std::shared_ptr<GameEntity>, MAX_ENTITIES> Entities { nullptr };
+        explicit Scene( const std::shared_ptr<RenderContext>& context );
 
         template <IsGameEntity TEntity>
         std::shared_ptr<TEntity> CreateEntity();
 
-        RenderContext renderContext;
+        std::array<std::shared_ptr<GameEntity>, MAX_ENTITIES> Entities { nullptr };
+
+        // Used when creating entities, contains the renderer reference the texture needs.
+        std::shared_ptr<RenderContext> renderContext;
 
 
     private:

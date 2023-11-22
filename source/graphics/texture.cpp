@@ -16,7 +16,7 @@ using SDLGame::Texture,
       System::Image,
       std::string;
 
-Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath) {
+Texture::Texture(const std::filesystem::path& imagePath, const std::shared_ptr<RenderContext>& context ) : renderContext( context ) {
     __STORE_CTOR_LINE__
     const std::filesystem::path usableRelImagePath = System::AsRelAssetPath( imagePath );
 
@@ -29,7 +29,7 @@ Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath)
     this->size = { imgFile.width, imgFile.height };
 
     //    SDL_Rect rect = {0, 0, imgFile.width, imgFile.height};
-    this->sdlRect = SDL_Rect { 0, 0, imgFile.width, imgFile.height };
+    this->sdl.nativeRect = SDL_Rect { 0, 0, imgFile.width, imgFile.height };
 
 #ifdef LOG_TEXTURE
     DebugLog::LogCyan( "Texture Constructor called" );
@@ -38,15 +38,33 @@ Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath)
                    "\n usableImagePath: ", usableRelImagePath,
                    "\n sourceWidth, sourceHeight: ", imgFile.width, ",", imgFile.height,
                    "\n sdlRect: "
-                   "(", sdlRect.w, ",", sdlRect.h, ",", sdlRect.x, ",", sdlRect.y, ")" );
+                   "(", sdl.nativeRect.w, ",", sdl.nativeRect.h, ",", sdl.nativeRect.x, ",", sdl.nativeRect.y, ")" );
 #endif
 
-    sdlTexture = IMG_LoadTexture( renderer, System::AsRelAssetPath( imagePath ).c_str() );
+    sdl.texture = IMG_LoadTexture( context->sdl.renderer, System::AsRelAssetPath( imagePath ).c_str() );
 
-
-    if(sdlTexture == nullptr) {
+    if(sdl.texture == nullptr) {
         DebugLog::LogWithSDLError( std::string( "Unable to load image:" ), imagePath );
     }
+}
+
+void Texture::RenderTo( const Position& targetPos ) const {
+        // auto const windowRenderer = renderContext.sdl->renderer;
+    const auto renderer = this->renderContext->sdl.renderer;
+
+    const PositionedRect targetRect = { targetPos, size };
+
+    // wrap SDL_Rect so it gets destroyed after call
+    const std::unique_ptr<SDL_Rect> dstRect (new SDL_Rect(targetRect));
+
+    // nativeRect could be using Dimensions cast but I'd have to verify assembly output
+    //            to make sure it's equally as fast after going through the compiler
+    SDL_RenderCopy( renderer,
+                    sdl.texture,
+                    &sdl.nativeRect,
+                    dstRect.get() );
+
+    SDL_RenderPresent( renderer );
 }
 
 // TODO 2 Introduce your own texture Class to hold the texture

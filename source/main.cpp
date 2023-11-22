@@ -19,8 +19,8 @@ namespace fs = std::filesystem;
 int main() {
     const Window* window = new Window();
 
-    const auto newTexture = window->CreateTexture( "images/texture.png" );
-    window->RenderTexture( newTexture );
+    // const auto newTexture = window->CreateTexture( "images/texture.png" );
+    // window->RenderTexture( newTexture );
 
     //https://wiki.libsdl.org/SDL2/SDL_Event
     SDL_Event event;
@@ -29,9 +29,7 @@ int main() {
     Scene scene { window->renderContext };
 
 
-    const auto bottleTexture = window->CreateTexture(  );
-
-    std::shared_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
+    // std::shared_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
 
     // scene.RegisterEventHandler( std::unique_ptr<EventHandler>() );
 

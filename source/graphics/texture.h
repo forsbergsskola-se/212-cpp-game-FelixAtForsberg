@@ -2,6 +2,7 @@
 #include <filesystem>
 
 #include "game/game.h"
+#include "render_context.hpp"
 #include "system/debug_log.hpp"
 
 
@@ -10,12 +11,21 @@
 namespace SDLGame {
     struct Texture {
 
-        Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath);
+        Texture(const std::filesystem::path& imagePath, const std::shared_ptr<RenderContext>& context);
+
+        void RenderTo( const Position& targetPos ) const;
 
         Dimensions      size;
 
-        SDL_Rect        sdlRect;
-        SDL_Texture*    sdlTexture;
+        const std::shared_ptr<RenderContext>   renderContext;
+
+
+        struct sdl_texture_t {
+            SDL_Rect        nativeRect;
+            SDL_Texture*    texture;
+        } sdl;
+
+
     };
-};
+}
 
