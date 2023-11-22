@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "system/files/file.h"
-#include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
+//#include <SDL2/SDL.h>
+//#include <SDL2_image/SDL_image.h>
 
 //class FileTest : public ::testing::Test {
 //protected:

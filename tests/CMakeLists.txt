@@ -1,5 +1,6 @@
 # http://google.github.io/googletest/quickstart-cmake.html
 #file(GLOB_RECURSE TEST_SOURCE_FILES "*.cpp")
+
 set(TEST_SOURCE_FILES main.cpp test_file.cpp)
 
 add_executable(${TEST_EXECUTABLE} ${TEST_SOURCE_FILES})
@@ -17,7 +18,7 @@ endif()
 target_link_libraries(
         ${TEST_EXECUTABLE} PRIVATE
         GTest::gtest_main
-        SDL2::SDL2
-        SDL2_image::SDL2_image
+#        SDL2::SDL2
+#        SDL2_image::SDL2_image
        $<TARGET_OBJECTS:${GAME_LIBRARY}>
 )
