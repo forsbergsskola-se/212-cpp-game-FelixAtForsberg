@@ -25,6 +25,7 @@ conditionally_log_files(${GAME_LOG_SOURCE_FILES} "GAME SOURCE FILES:" "${GAME_SO
 add_executable(
     ${GAME_EXECUTABLE} MACOSX_BUNDLE ${GAME_SOURCE_FILES}
 )
+target_include_directories(${GAME_EXECUTABLE} PRIVATE "./") # allow use of source relative include paths
 
 # ===============================================
 # =============== SDL2 - Link to Game Executable + Library
