@@ -1,12 +1,12 @@
 #include <cstdio>
-#include <format>
 #include <iostream>
 #include <string>
 #include <filesystem>
 
 #include <SDL.h>
-#include <SDL2_image/SDL_image.h>
 
+#include "game/game_scene.h"
+#include "game/entities/entity_bottle.hpp"
 #include "system/window.h"
 #include "graphics/texture.h"
 #include "system/debug_log.hpp"
@@ -15,31 +15,47 @@ using namespace SDLGame;
 
 namespace fs = std::filesystem;
 
-//#include <SDL2_ttf/SDL_ttf.h>
 
-int main()
-{
+int main() {
+    const Window* window = new Window();
 
-    Window* window = new Window();
+    const auto newTexture = window->CreateTexture( "images/texture.png" );
+    window->RenderTexture( newTexture );
 
-    auto newTexture = window->CreateTexture("texture.png");
-    window->RenderTexture(newTexture);
+    //https://wiki.libsdl.org/SDL2/SDL_Event
+    SDL_Event event;
 
-    bool quit = false;
 
-    SDL_Event e;
+    Scene scene { window->renderContext };
 
-    //While application is running
-    while( !quit )
-    {
-        while( SDL_PollEvent( &e ) != 0 )
-        {
-            if( e.type == SDL_QUIT )
-            {
-                quit = true;
+
+    const auto bottleTexture = window->CreateTexture(  );
+
+    std::shared_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
+
+    // scene.RegisterEventHandler( std::unique_ptr<EventHandler>() );
+
+    bool quitRequested = false;
+
+    while(!quitRequested) {
+        while(SDL_PollEvent( &event ) != 0) {
+            switch(event.type) {
+                case SDL_MOUSEBUTTONDOWN:
+                    if(event.button.button == SDL_BUTTON_LEFT) {
+                        int x = event.button.x;
+                        int y = event.button.y;
+                        DebugLog::Log( "Click at: ", x, " ", y );
+                    }
+                case SDL_KEYDOWN:
+
+                    break;
+
+                case SDL_QUIT:
+                    quitRequested = true;
+                    break;
             }
-        }
 
+        }
     }
-	return 0;
+    return 0;
 }

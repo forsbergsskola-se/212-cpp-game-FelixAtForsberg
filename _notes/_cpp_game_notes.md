@@ -6,6 +6,23 @@ https://www.libsdl.org/release/
 
 ---
 
++----------+     +------+ 
+| Game_lib |     | SDL2 |
++----|-----+     +--|---+ 
+     |              |
+     +--------------+ 
+     |
++----↓-----+
+| Game_exe |
++----------+
+
+                                 SDL2
+Test_exe --[Dynamically]-> Game_lib 
+
+Test --[]
+
+---
+
 Fix:
     Correct casing in path to real filename 
     "system/Window.h" -> "system/window.h"

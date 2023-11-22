@@ -1,14 +1,12 @@
 #pragma once
 
+#include "../graphics/render_context.h"
 #include "../graphics/texture.h"
 
 namespace SDLGame {
 
     class Window {
         SDL_Window*      sdlWindow;
-        SDL_Renderer*    windowRenderer;
-        SDL_Surface*     windowSurface;
-        SDL_PixelFormat* windowFormat;
 
     //    void LoadImage(std::string& imagePath, SDL_PixelFormat* format);
 
@@ -16,11 +14,14 @@ namespace SDLGame {
         Window();
         ~Window();
 
-        static constexpr int SCREEN_WIDTH = 640;
-        static constexpr int SCREEN_HEIGHT = 480;
+        std::shared_ptr<RenderContext> renderContext;
+        Texture CreateTexture( const std::filesystem::path& imageName ) const;
 
-        Texture CreateTexture(const std::filesystem::path& imagePath);
+        static constexpr int SCREEN_WIDTH = 880;
+        static constexpr int SCREEN_HEIGHT = 550;
 
-        void RenderTexture(const Texture& texture);
+        // Texture CreateTexture(const std::filesystem::path& imageName) const;
+
+        void RenderTexture(const Texture& texture) const;
     };
 }

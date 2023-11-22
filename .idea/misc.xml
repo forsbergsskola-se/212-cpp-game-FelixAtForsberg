@@ -6,6 +6,7 @@
       <file path="$PROJECT_DIR$/source" />
     </sourceRoots>
     <libraryRoots>
+      <file path="$PROJECT_DIR$/experiments" />
       <file path="$PROJECT_DIR$/tests" />
       <file path="$PROJECT_DIR$/vendored/SDL2.framework" />
       <file path="$PROJECT_DIR$/vendored/SDL2_image.framework" />

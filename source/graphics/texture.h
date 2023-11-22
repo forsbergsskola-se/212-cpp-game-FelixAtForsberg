@@ -2,19 +2,19 @@
 #include <string>
 #include <filesystem>
 #include "../system/debug_log.hpp"
+#include "../game/game.h"
+
 
 #define LOG_TEXTURE
 
 namespace SDLGame {
-    class Texture {
-        int             sourceWidth;
-        int             sourceHeight;
-
-    public:
+    struct Texture {
 
         Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath);
 
-        SDL_Rect        sourceRect;
+        Dimensions      size;
+
+        SDL_Rect        sdlRect;
         SDL_Texture*    sdlTexture;
     };
 };

@@ -11,8 +11,7 @@ set(GAME_LIBRARY_LOG_SOURCE_FILES ON CACHE BOOL "Print game library source files
 
 set(TEST_LOG_SOURCE_FILES         ON CACHE BOOL "Print test source files")
 
-
-set(USE_VENDORED_SDL2          ON CACHE BOOL "Prefer vendored SDL2" FORCE)
+set(USE_VENDORED_SDL2             OFF CACHE BOOL "Prefer vendored SDL2")
 
 
 # "INTERNAL": Don't show in CMakeGUI & always override (implies FORCE)
@@ -36,7 +35,7 @@ if(LOG_CMAKE_VERBOSE)
 endif()
 
 if(LOG_LINKER_VERBOSE)
-    set(CMAKE_EXE_LINKER_FLAGS       "${CMAKE_EXE_LINKER_FLAGS} -v")
+    set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -v")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -v")
     set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -v")
 endif()
@@ -104,4 +103,3 @@ enable_testing()
 
 add_subdirectory(source)
 add_subdirectory(tests)
-

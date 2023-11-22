@@ -1,5 +1,6 @@
 #include "file.h"
 #include "file_image.h"
+#include "../../system/debug_log.hpp"
 #include <span>
 #include <iostream>
 #include <bit>
@@ -14,7 +15,7 @@ using SDLGame::System::IMAGE_TYPE,
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 
-SDLGame::System::Image::Image(const path& imagePath) : SDLGame::System::File(imagePath) {
+Image::Image(const path& imagePath) : File(imagePath) {
 
     array<unsigned char, 8> sigBuffer = {};
     fileStream.read(reinterpret_cast<char *>(sigBuffer.data()), sigBuffer.size());
@@ -25,7 +26,7 @@ SDLGame::System::Image::Image(const path& imagePath) : SDLGame::System::File(ima
         type = IMAGE_TYPE::PNG;
 
 #ifdef LOG_FILE_IMAGE_CTOR
-        std::cout << "PNG identified by signature" << std::endl;
+         DebugLog::LogSuccess("PNG identified by signature");
 #endif
         // wasting 4 bytes here to avoid repetition, perhaps compiler optimizations will catch it.
         array<unsigned char, 4> widthBytes{};
@@ -39,7 +40,7 @@ SDLGame::System::Image::Image(const path& imagePath) : SDLGame::System::File(ima
         fileStream.read(reinterpret_cast<char *>(&heightBytes), 4);
 
         // we portable af - swap endian of numbers if we're on little endian, so they read properly
-        if (std::endian::native == std::endian::little) {
+        if constexpr(std::endian::native == std::endian::little) {
             ConvertEndian(widthBytes);
             width = *reinterpret_cast<int *>(widthBytes.data());
             ConvertEndian(heightBytes);

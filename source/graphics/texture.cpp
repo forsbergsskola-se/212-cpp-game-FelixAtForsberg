@@ -4,8 +4,8 @@
 #include <filesystem>
 
 #include "texture.h"
-#include "../system/files/file.h"
-#include "../system/files/file_image.h"
+#include "../system/file/file.h"
+#include "../system/file/file_image.h"
 #include "../system/system_static.h"
 
 using namespace SDLGame;
@@ -14,36 +14,36 @@ using SDLGame::Texture,
       System::Image,
       std::string;
 
-Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath)  {
+Texture::Texture(SDL_Renderer* renderer, const std::filesystem::path& imagePath) {
+    __STORE_CTOR_LINE__
+    const std::filesystem::path usableRelImagePath = System::AsRelAssetPath( imagePath );
 
-    const std::filesystem::path usableRelImagePath = System::AsRelAssetPath(imagePath);
+    const Image imgFile( usableRelImagePath );
 
-    const Image imgFile(usableRelImagePath);
-
-    if (!imgFile.exists) {
-        DebugLog::LogError("Attempted to create texture with non-existent path: ", imagePath);
+    if(!imgFile.exists) {
+        DebugLog::LogError( "Attempted to create texture with non-existent path: ", imagePath );
     }
 
-    this->sourceWidth  = imgFile.width;
-    this->sourceHeight = imgFile.height;
+    this->size = { imgFile.width, imgFile.height };
 
-//    SDL_Rect rect = {0, 0, imgFile.width, imgFile.height};
-    this->sourceRect = SDL_Rect {0,0,sourceWidth, sourceHeight};
+    //    SDL_Rect rect = {0, 0, imgFile.width, imgFile.height};
+    this->sdlRect = SDL_Rect { 0, 0, imgFile.width, imgFile.height };
 
 #ifdef LOG_TEXTURE
-    DebugLog::Log("Texture Constructor called.",
-                  "\n imagePath:       ", imagePath,
-                  "\n usableImagePath: ", usableRelImagePath,
-                  "\n sourceWidth, sourceHeight: ", sourceWidth, ",", sourceHeight,
-                  "\n sourceRect: "
-                  "(",sourceRect.w,",",sourceRect.h,",",sourceRect.x,",", sourceRect.y,")");
+    DebugLog::LogCyan( "Texture Constructor called" );
+    DebugLog::Log( " source:          \"", __FILE__, ":", __CTOR_LINE__, "\"",
+                   "\n imagePath:       ", imagePath,
+                   "\n usableImagePath: ", usableRelImagePath,
+                   "\n sourceWidth, sourceHeight: ", imgFile.width, ",", imgFile.height,
+                   "\n sdlRect: "
+                   "(", sdlRect.w, ",", sdlRect.h, ",", sdlRect.x, ",", sdlRect.y, ")" );
 #endif
 
-    sdlTexture = IMG_LoadTexture(renderer, System::AsRelAssetPath(imagePath).c_str());
+    sdlTexture = IMG_LoadTexture( renderer, System::AsRelAssetPath( imagePath ).c_str() );
 
 
-    if (sdlTexture == nullptr) {
-        DebugLog::LogWithSDLError(std::string("Unable to load image:"), imagePath);
+    if(sdlTexture == nullptr) {
+        DebugLog::LogWithSDLError( std::string( "Unable to load image:" ), imagePath );
     }
 }
 

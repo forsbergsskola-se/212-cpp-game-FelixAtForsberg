@@ -46,10 +46,10 @@ namespace SDLGame::System {
 
     std::filesystem::path AsRelAssetPath(const path &assetPath) {
 
-        if (IsFilenameOnly(assetPath)) {
+//        if (IsFilenameOnly(assetPath)) {
             return path{ DIR_REL_RESOURCES / assetPath };
-        }
-        throw(std::invalid_argument(assetPath));
+//        }
+//        throw(std::invalid_argument(assetPath));
     }
 
 }

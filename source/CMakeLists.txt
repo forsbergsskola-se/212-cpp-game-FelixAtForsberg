@@ -3,19 +3,21 @@ cmake_minimum_required(VERSION 3.26)
 # ===============================================
 # =============== Game Library - For linking tests to game functions
 
-file(GLOB_RECURSE GAME_LIBRARY_SOURCE_FILES "*.cpp" "*.h" "*.inl")
-# use game files without entry point (main.cpp)
+file(GLOB_RECURSE GAME_LIBRARY_SOURCE_FILES "*.cpp" "*.h" "*.inl" "*.hpp")
+# use game file without entry point (main.cpp)
 list(FILTER GAME_LIBRARY_SOURCE_FILES EXCLUDE REGEX ".*\\main.cpp$") # remove main.cpp
 
 conditionally_log_files(${GAME_LIBRARY_LOG_SOURCE_FILES} "GAME LIBRARY FILES:" "${GAME_LIBRARY_SOURCE_FILES}")
 
 add_library(${GAME_LIBRARY} OBJECT ${GAME_LIBRARY_SOURCE_FILES})
+target_include_directories(${GAME_LIBRARY} PRIVATE "./") # allow use of source relative include paths
+
 
 # ===============================================
 # =============== Game Executable - Reuse library and link to executable
 
 
-# add main.cpp and reuse object files built from source files
+# add main.cpp and reuse object file built from source file
 set(GAME_SOURCE_FILES main.cpp $<TARGET_OBJECTS:${GAME_LIBRARY}>)
 conditionally_log_files(${GAME_LOG_SOURCE_FILES} "GAME SOURCE FILES:" "${GAME_SOURCE_FILES}")
 

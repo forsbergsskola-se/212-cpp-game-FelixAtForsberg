@@ -21,12 +21,29 @@ namespace CON {
 
     static std::unordered_map<std::string, std::string> FG =
     {
-        {"RED",   "31m"},
-        {"GREEN", "32m"},
-        {"YELLOW", "33m"},
+        {"RED",     "31m"},
+        {"GREEN",   "32m"},
+        {"YELLOW",  "33m"},
+        {"BLUE",    "34m"},
+        {"MAGENTA", "35m"},
+        {"CYAN",    "36m"},
+        {"WHITE",   "37m"},
+        {"DEFAULT", "39m"},
     };
 
-    static std::unordered_map<std::string, std::string> TEXT =
+    static std::unordered_map<std::string, std::string> FGB =
+    {
+        {"BLACK",   "90m"},
+        {"RED",     "91m"},
+        {"GREEN",   "92m"},
+        {"YELLOW",  "93m"},
+        {"BLUE",    "94m"},
+        {"MAGENTA", "95m"},
+        {"CYAN",    "96m"},
+        {"WHITE",   "97m"},
+    };
+
+    static std::unordered_map<std::string, std::string> TXT =
     {
         {"RESET",   "0m"},
         {"BOLD",    "1m"},
@@ -55,7 +72,7 @@ namespace SDLGame {
         static void PipeWithEscPrefix(std::ostream& stream, std::string prefix, TPrint&&... printArgs) {
             stream << SET(prefix);
             Pipe(stream, printArgs...);
-            stream << SET(TEXT["RESET"]);
+            stream << SET(TXT["RESET"]);
         }
 
     public:
@@ -77,7 +94,12 @@ namespace SDLGame {
 
         template<typename... TPrint>
         static void LogSuccess(TPrint&&... printArgs) {
-            LogEscPrefix(FG["GREEN"], printArgs...);
+            PipeWithEscPrefix(std::cout, FG["GREEN"], printArgs...);
+        }
+
+        template<typename... TPrint>
+        static void LogCyan(TPrint&&... printArgs) {
+            PipeWithEscPrefix(std::cout, FGB["CYAN"], printArgs...);
         }
 
         // "Bad" Logs
