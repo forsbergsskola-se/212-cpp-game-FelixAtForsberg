@@ -1,6 +1,7 @@
+#pragma once
 
-#include "game_entity.h"
-#include "game_entity_textured.h"
+#include "game/entities/game_entity_textured.h"
+
 
 namespace SDLGame {
 

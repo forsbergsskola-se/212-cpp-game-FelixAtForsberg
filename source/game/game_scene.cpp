@@ -1,6 +1,5 @@
-#include "game_scene.h"
-
-#include "../system/debug_log.hpp"
+#include "game/game_scene.h"
+#include "system/debug_log.hpp"
 
 
 namespace SDLGame {

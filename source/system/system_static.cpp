@@ -1,9 +1,9 @@
-#include "system_static.h"
-#include "debug_log.hpp"
+#include <array>
 #include <filesystem>
 #include <mach-o/dyld.h>
-#include <climits>
-#include <array>
+
+#include "system/debug_log.hpp"
+#include "system/system_static.h"
 
 //     const std::filesystem::path curWorkDir = std::filesystem::current_path();
 

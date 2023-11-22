@@ -1,15 +1,15 @@
 #include <cstdio>
+#include <filesystem>
 #include <iostream>
 #include <string>
-#include <filesystem>
 
 #include <SDL.h>
 
 #include "game/game_scene.h"
 #include "game/entities/entity_bottle.hpp"
-#include "system/window.h"
 #include "graphics/texture.h"
 #include "system/debug_log.hpp"
+#include "system/window.h"
 
 using namespace SDLGame;
 

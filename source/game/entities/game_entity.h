@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../system/system_static.h"
-#include "../../system/event/events.h"
+#include "system/system_static.h"
+#include "system/event/events.h"
 
 
 // when you have support for textures

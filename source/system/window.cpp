@@ -1,14 +1,14 @@
+#include <array>
+#include <iostream>
+
+#include <SDL_video.h>
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
-#include <SDL_video.h>
 
-#include <iostream>
-#include <array>
-
-#include "window.h"
-#include "../graphics/texture.h"
-#include "debug_log.hpp"
+#include "system/window.h"
+#include "graphics/texture.h"
+#include "system/debug_log.hpp"
 
 using namespace SDLGame;
 

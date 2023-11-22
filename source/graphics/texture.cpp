@@ -1,12 +1,14 @@
+#include "graphics/texture.h"
+
+#include <filesystem>
+#include <string>
+
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
-#include <string>
-#include <filesystem>
 
-#include "texture.h"
-#include "../system/file/file.h"
-#include "../system/file/file_image.h"
-#include "../system/system_static.h"
+#include "system/system_static.h"
+#include "system/file/file.h"
+#include "system/file/file_image.h"
 
 using namespace SDLGame;
 using SDLGame::Texture,

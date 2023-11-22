@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../graphics/render_context.h"
-#include "../graphics/texture.h"
+#include "graphics/render_context.h"
+#include "graphics/texture.h"
 
 namespace SDLGame {
 

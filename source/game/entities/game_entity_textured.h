@@ -1,7 +1,7 @@
 #pragma once
-#include "../game.h"
-#include "../../graphics/texture.h"
-#include "game_entity.h"
+#include "game/game.h"
+#include "game/entities/game_entity.h"
+#include "graphics/texture.h"
 
 
 namespace SDLGame {

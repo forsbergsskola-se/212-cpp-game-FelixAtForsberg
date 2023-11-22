@@ -1,9 +1,10 @@
-#include "file.h"
-#include "file_image.h"
-#include "../../system/debug_log.hpp"
 #include <span>
 #include <iostream>
 #include <bit>
+
+#include "system/file/file.h"
+#include "system/file/file_image.h"
+#include "system/debug_log.hpp"
 
 using SDLGame::System::IMAGE_TYPE,
         SDLGame::System::Image,

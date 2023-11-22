@@ -1,5 +1,5 @@
 #include <iostream>
-#include "game_entity.h"
+#include "game/entities/game_entity.h"
 
 
 namespace SDLGame {

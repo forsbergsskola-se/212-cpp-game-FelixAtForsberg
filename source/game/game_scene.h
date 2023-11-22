@@ -1,9 +1,9 @@
 #pragma once
 #include <array>
-#include "entities/game_entity.h"
-#include "input/game_input.h"
-#include "../system/event/events.h"
+#include "game/entities/game_entity.h"
+#include "game/input/game_input.h"
 #include "graphics/render_context.h"
+#include "system/event/events.h"
 
 
 namespace SDLGame {

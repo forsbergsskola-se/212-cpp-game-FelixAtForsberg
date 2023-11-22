@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
 #include <filesystem>
-#include "../system/debug_log.hpp"
-#include "../game/game.h"
+
+#include "game/game.h"
+#include "system/debug_log.hpp"
 
 
 #define LOG_TEXTURE

@@ -1,8 +1,7 @@
 #pragma once
-#include <string>
 #include <array>
-#include <SDL_rect.h>
-#include "file.h"
+
+#include "system/file/file.h"
 
 #define LOG_FILE_IMAGE_CTOR
 

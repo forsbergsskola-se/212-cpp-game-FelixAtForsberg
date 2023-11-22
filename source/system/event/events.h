@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <variant>
 #include <functional>
+
 #include <SDL_events.h>
 
 

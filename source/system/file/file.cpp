@@ -1,7 +1,7 @@
-#include "file.h"
-#include "../debug_log.hpp"
 #include <fstream>
 #include <iostream>
+
+#include "system/file/file.h"
 
 using namespace SDLGame::System;
 namespace fs = std::filesystem;

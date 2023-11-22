@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-#include <array>
 #include <fstream>
 
 namespace SDLGame::System {
