@@ -5,9 +5,8 @@
 
 #include <SDL.h>
 
-#include "game/game_scene.h"
+#include "game/scene.h"
 #include "game/entities/entity_bottle.hpp"
-#include "graphics/texture.h"
 #include "system/debug_log.hpp"
 #include "system/window.h"
 
@@ -29,7 +28,9 @@ int main() {
     Scene scene { window->renderContext };
 
 
-    // std::shared_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
+    std::weak_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
+
+    scene.Render();
 
     // scene.RegisterEventHandler( std::unique_ptr<EventHandler>() );
 

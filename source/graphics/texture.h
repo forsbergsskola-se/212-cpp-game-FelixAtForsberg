@@ -9,15 +9,13 @@
 #define LOG_TEXTURE
 
 namespace SDLGame {
-    struct Texture {
+        struct Texture {
 
-        Texture(const std::filesystem::path& imagePath, const std::shared_ptr<RenderContext>& context);
-
-        void RenderTo( const Position& targetPos ) const;
+        Texture(const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context);
 
         Dimensions      size;
 
-        const std::shared_ptr<RenderContext>   renderContext;
+        const std::weak_ptr<RenderContext>   renderContext;
 
 
         struct sdl_texture_t {

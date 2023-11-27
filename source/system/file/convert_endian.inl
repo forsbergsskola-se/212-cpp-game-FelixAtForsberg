@@ -2,9 +2,7 @@
 
 //#define LOG_ENDIAN_CONVERSION
 
-#include <iostream>
-
-namespace {
+namespace SDLGame {
     template<std::size_t N, typename T = char>
     void ConvertEndian(std::array<T, N>& buffer) {
         const size_t half = buffer.size() / 2;

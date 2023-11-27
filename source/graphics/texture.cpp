@@ -12,11 +12,11 @@
 
 using namespace SDLGame;
 using SDLGame::Texture,
-      System::File,
-      System::Image,
-      std::string;
+        System::File,
+        System::Image,
+        std::string;
 
-Texture::Texture(const std::filesystem::path& imagePath, const std::shared_ptr<RenderContext>& context ) : renderContext( context ) {
+Texture::Texture( const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context ) : renderContext( context ) {
     __STORE_CTOR_LINE__
     const std::filesystem::path usableRelImagePath = System::AsRelAssetPath( imagePath );
 
@@ -41,31 +41,16 @@ Texture::Texture(const std::filesystem::path& imagePath, const std::shared_ptr<R
                    "(", sdl.nativeRect.w, ",", sdl.nativeRect.h, ",", sdl.nativeRect.x, ",", sdl.nativeRect.y, ")" );
 #endif
 
-    sdl.texture = IMG_LoadTexture( context->sdl.renderer, System::AsRelAssetPath( imagePath ).c_str() );
+    sdl.texture = IMG_LoadTexture( context.lock()->sdl.renderer, System::AsRelAssetPath( imagePath ).c_str() );
 
     if(sdl.texture == nullptr) {
         DebugLog::LogWithSDLError( std::string( "Unable to load image:" ), imagePath );
     }
 }
 
-void Texture::RenderTo( const Position& targetPos ) const {
-        // auto const windowRenderer = renderContext.sdl->renderer;
-    const auto renderer = this->renderContext->sdl.renderer;
-
-    const PositionedRect targetRect = { targetPos, size };
-
-    // wrap SDL_Rect so it gets destroyed after call
-    const std::unique_ptr<SDL_Rect> dstRect (new SDL_Rect(targetRect));
-
-    // nativeRect could be using Dimensions cast but I'd have to verify assembly output
-    //            to make sure it's equally as fast after going through the compiler
-    SDL_RenderCopy( renderer,
-                    sdl.texture,
-                    &sdl.nativeRect,
-                    dstRect.get() );
-
-    SDL_RenderPresent( renderer );
-}
+// void Texture::RenderTo( const Position& targetPos ) const {
+//
+// }
 
 // TODO 2 Introduce your own texture Class to hold the texture
 // Constructor: (Assign <- or Load texture) Destructor: Free the texture
@@ -78,9 +63,7 @@ void Texture::RenderTo( const Position& targetPos ) const {
 //SDL_Texture* texture::CreateTexture(std::string &imagePath) {
 
 //    SDL_Surface* imgSurface = gtexture::CreateSurface(imagePath);
-    // TODO 1: Create texture from Surface
+// TODO 1: Create texture from Surface
 //    SDL_Texture* newTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
 //    return newTexture;
 //}
-
-

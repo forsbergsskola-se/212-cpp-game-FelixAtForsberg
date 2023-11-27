@@ -1,22 +1,22 @@
 #pragma once
 
-#include "game/entities/game_entity_textured.h"
+#include "game_entity_renderable.h"
 
 
 namespace SDLGame {
 
-    class EntityBottle final : GameEntityTextured {
+    struct EntityBottle final : GameEntityRenderable {
 
-        inline static const std::filesystem::path texturePath = "images/bottle.png";
-        // Bottle() : GameEntityTextured() {
+        explicit EntityBottle( const std::weak_ptr<RenderContext>& context ) : GameEntityRenderable(texturePath, context) {
 
-        // };
-
-    public:
-
-        explicit EntityBottle( const Texture& tex )
-        : GameEntityTextured( tex ) {
         }
+
+
+        // std::filesystem::path const TexturePath() const override {
+            // return std::filesystem::path("images/Bottle.png");
+        // }
+
+        inline static const std::filesystem::path texturePath = "images/Bottle.png";
 
     private:
 
@@ -24,5 +24,4 @@ namespace SDLGame {
 
         }
     };
-
 }
