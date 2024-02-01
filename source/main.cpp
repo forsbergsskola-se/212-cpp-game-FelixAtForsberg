@@ -28,7 +28,12 @@ int main() {
     Scene scene { window->renderContext };
 
 
-    std::weak_ptr<EntityBottle> bottle = scene.CreateEntity<EntityBottle>();
+    std::weak_ptr<EntityBottle> bottle1 = scene.CreateEntity<EntityBottle>();
+    std::weak_ptr<EntityBottle> bottle2 = scene.CreateEntity<EntityBottle>();
+    std::weak_ptr<EntityBottle> bottle3 = scene.CreateEntity<EntityBottle>();
+
+    Position newPos = Position(50, 50);
+    std::weak_ptr<EntityBottle> bottlePos = scene.CreateEntity<EntityBottle>( newPos );
 
     scene.Render();
 

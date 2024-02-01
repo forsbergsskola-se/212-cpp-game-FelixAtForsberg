@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <unordered_set>
+#include <type_traits>
 
 #include "game/entities/game_entity.h"
 #include "game/input/game_input.h"
@@ -9,19 +10,25 @@
 
 
 namespace SDLGame {
+    struct Position;
 
     constexpr size_t MAX_ENTITIES = 2048;
     constexpr bool LOG_SCENE_ENTITY_CREATION = true;
 
 
     template <typename T>
-    concept HasElementType = requires { typename T::element_type; };
+    concept HasElementType   = requires { typename T::element_type; };
 
     template <typename T>
-    concept IsGameEntity = requires { std::derived_from<T, GameEntity>; };
+    concept IsGameEntity     = requires { std::derived_from<T, GameEntity>; };
 
     template <typename T>
-    concept IsGameEntityPtr = requires { std::derived_from<typename T::element_type, GameEntity>; };
+    concept IsGameEntityPtr  = requires { std::derived_from<typename T::element_type, GameEntity>; };
+
+    template <typename T>
+    concept HasPositionField = requires(T a) {
+        { std::is_same_v<T, int> };
+    };
 
     class Scene {
 
@@ -32,6 +39,10 @@ namespace SDLGame {
 
         template <IsGameEntity TEntity>
         std::weak_ptr<TEntity> CreateEntity();
+
+
+        template <HasPositionField TEntity>
+        std::weak_ptr<TEntity> CreateEntity( Position pos );
 
 
         void RenderEntities() const;
