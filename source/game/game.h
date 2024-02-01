@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include <SDL_rect.h>
 
 namespace SDLGame {
@@ -16,7 +15,7 @@ namespace SDLGame {
     struct Position {
         int x = 0, y = 0;
 
-
+        explicit Position(const int x = 0, const int y = 0) : x(x), y(y) {}
     };
 
     struct PositionedRect {
