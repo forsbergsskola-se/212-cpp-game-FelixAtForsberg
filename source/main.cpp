@@ -49,7 +49,9 @@ int main() {
                         int x = event.button.x;
                         int y = event.button.y;
                         DebugLog::Log( "Click at: ", x, " ", y );
+                        auto bottle = scene.CreateEntity<EntityBottle>( Position{x, y} );
                     }
+
                 case SDL_KEYDOWN:
 
                     break;
@@ -60,6 +62,7 @@ int main() {
             }
 
         }
+        scene.Render();
     }
     return 0;
 }

@@ -32,8 +32,6 @@ void SDLGame::GameEntityRenderable::RenderEntity() {
                         &this->texture->sdl.nativeRect,
                         dstRect.get() );
 
-        SDL_RenderPresent( renderer );
-
     } else {
         DebugLog::LogError( "[RenderEntity] UNABLE TO RENDER ENTITY: Entity failed to acquire texture renderContext lock!" );
     }
