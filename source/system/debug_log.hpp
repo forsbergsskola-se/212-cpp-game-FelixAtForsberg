@@ -14,7 +14,7 @@ using std::string_view;
 
 //  ostream: basic_ostream<char>
 // wostream: basic_ostream<wchar_t>
-//https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+// Escape Sequences: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
 namespace CON {
 
@@ -88,8 +88,7 @@ namespace SDLGame {
             Pipe(std::cerr, printArgs...);
         }
 
-
-
+        // ----------- Colored Logs -----------
 
         // Neutral + Good Logs
 
@@ -102,6 +101,7 @@ namespace SDLGame {
         static void LogCyan(TPrint&&... printArgs) {
             PipeWithEscPrefix(std::cout, FGB["CYAN"], printArgs...);
         }
+
 
         // "Bad" Logs
 
