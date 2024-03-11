@@ -20,6 +20,7 @@ namespace CON {
 
     static const std::string ESC{"\033["};
 
+    // Foreground
     static std::unordered_map<std::string, std::string> FG =
     {
         {"RED",     "31m"},
@@ -32,6 +33,7 @@ namespace CON {
         {"DEFAULT", "39m"},
     };
 
+    // Foreground Bright
     static std::unordered_map<std::string, std::string> FGB =
     {
         {"BLACK",   "90m"},
@@ -44,6 +46,7 @@ namespace CON {
         {"WHITE",   "97m"},
     };
 
+    // Text Display + Misc
     static std::unordered_map<std::string, std::string> TXT =
     {
         {"RESET",   "0m"},
@@ -70,7 +73,7 @@ namespace SDLGame {
         }
 
         template<typename... TPrint>
-        static void PipeWithEscPrefix(std::ostream& stream, std::string prefix, TPrint&&... printArgs) {
+        static void PipeWithEscPrefix(std::ostream& stream, const std::string prefix, TPrint&&... printArgs) {
             stream << SET(prefix);
             Pipe(stream, printArgs...);
             stream << SET(TXT["RESET"]);
@@ -102,6 +105,10 @@ namespace SDLGame {
             PipeWithEscPrefix(std::cout, FGB["CYAN"], printArgs...);
         }
 
+        template<typename... TPrint>
+        static void LogMagenta(TPrint&&... printArgs) {
+            PipeWithEscPrefix(std::cout, FGB["MAGENTA"], printArgs...);
+        }
 
         // "Bad" Logs
 

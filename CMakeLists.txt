@@ -103,3 +103,5 @@ enable_testing()
 
 add_subdirectory(source)
 add_subdirectory(tests)
+add_executable(scratch "/Users/felixberge/Library/Application Support/JetBrains/CLionNova2024.1/scratches/ConstReturns.cpp")
+set_target_properties(scratch PROPERTIES RUNTIME_OUTPUT_DIRECTORY "~/build_file_out")

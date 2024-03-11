@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <type_traits>
 
+#include "game/game_ui.h"
 #include "game/entities/game_entity.h"
 #include "game/input/game_input.h"
 #include "graphics/render_context.hpp"
@@ -34,7 +35,8 @@ namespace SDLGame {
 
     public:
 
-        explicit Scene( const std::shared_ptr<RenderContext>& context );
+        explicit Scene(const std::shared_ptr<RenderContext>& context );
+        // explicit Scene( std::shared_ptr<RenderContext> context );
 
 
         template <IsGameEntity TEntity>
@@ -44,6 +46,7 @@ namespace SDLGame {
         template <HasPositionField TEntity>
         std::weak_ptr<TEntity> CreateEntity( Position pos );
 
+        UIManager uiManager;
 
         void RenderEntities() const;
 
@@ -51,7 +54,18 @@ namespace SDLGame {
         void DisplayCurrentRender() const;
 
 
+        void RenderUI() const;
+
+
+        void TickEntities( const Uint64 &frameDelta ) const;
+
+
+        void ClearCurrentRender() const;
+
+
         void Render() const;
+
+
 
 
         // create a entity and optionally return

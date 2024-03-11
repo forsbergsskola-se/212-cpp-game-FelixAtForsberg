@@ -8,9 +8,7 @@
 
 
 SDLGame::GameEntityRenderable::GameEntityRenderable( const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context ) :
-texture( std::make_shared<Texture>( imagePath, context ) ) {
-
-}
+texture( std::make_shared<Texture>( imagePath, context ) ) {}
 
 
 // Copy texture to renderContext renderer

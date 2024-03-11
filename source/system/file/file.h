@@ -10,16 +10,23 @@ namespace SDLGame::System {
 
 
     public:
-        File() = delete;
-
-        std::basic_ifstream<char> fileStream;
 
         explicit File(const std::filesystem::path& path);
+        File() = delete;
 
-        bool exists;
+        const std::filesystem::path path;
+
+        // usable as in can be passed to things that expect to find the file
+        // meaning: 'resources' directory; relative to executable
+
+        std::ifstream fileStream;
+
+        const bool exists;
+
+        std::filesystem::path usablePath() const;
     };
 }
 // having to do this song and dance for
 // basically somewhat approaching
-// declaration separation is quite sad
+// declaration separation is wonky
 #include "convert_endian.inl"

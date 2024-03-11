@@ -15,7 +15,7 @@ namespace SDLGame {
 
         Dimensions      size;
 
-        const std::weak_ptr<RenderContext>   renderContext;
+        std::weak_ptr<RenderContext> renderContext;
 
 
         struct sdl_texture_t {

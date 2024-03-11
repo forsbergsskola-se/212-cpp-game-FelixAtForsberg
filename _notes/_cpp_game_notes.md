@@ -1,11 +1,64 @@
 https://www.libsdl.org/release/
 
+### SDL2
+By Name:
+https://wiki.libsdl.org/SDL2/CategoryAPI
+
+By Category:
+https://wiki.libsdl.org/SDL2/APIByCategory
+
+### SDL2_ttf
+https://wiki.libsdl.org/SDL2_ttf/CategoryAPI
+
 ---
+### Problem ID: 3eb9bf17-0e72-463c-b961-c491236c3179
+### Problem:
+    I want to only update the texture of a label when the text changes, in C++, getters and setters are usually considered code smells which is how I would handle this in other garbage collected languages; now how should I do it?
+    I wish to follow "Tell Don't Ask" // https://wiki.c2.com/?TellDontAsk=
 
+
+
+### Thinking about the solution:
+    I could wrap std::string and define a new assignment operator
+    But that would be more verbose than I'd like
+
+### Solution:
+    IDFNI -- I'll just push the responsibility to whomever updates the text
 
 
 ---
+### Problem:
+  const shared_ptr&: doesn't work
+    
+  but shared_ptr by copy does work
 
+#### const shared_ptr --- DOESN'T WORK
+```c++
+    // scene.cpp
+    Scene::Scene( const std::shared_ptr<RenderContext>& context ) : // ...
+                                                             renderContext { std::weak_ptr(context) }
+    // ------------------------------------------------------------------------------
+    // scene.h
+    explicit Scene( const std::shared_ptr<RenderContext>& context );
+    
+```
+#### pass shared_ptr by copy --- WORKS
+```c++
+    // scene.cpp
+    Scene::Scene( std::shared_ptr<RenderContext> context ) : // ...
+                                                            renderContext { std::weak_ptr(context) },
+    // ------------------------------------------------------------------------------
+    // scene.h
+    explicit Scene( std::shared_ptr<RenderContext> context );
+
+```
+it should work:
+    https://stackoverflow.com/questions/8385457/should-i-pass-a-shared-ptr-by-reference
+    ""
+
+
+---
+```
 +----------+     +------+ 
 | Game_lib |     | SDL2 |
 +----|-----+     +--|---+ 
@@ -15,6 +68,7 @@ https://www.libsdl.org/release/
 +----↓-----+
 | Game_exe |
 +----------+
+```
 
                                  SDL2
 Test_exe --[Dynamically]-> Game_lib 

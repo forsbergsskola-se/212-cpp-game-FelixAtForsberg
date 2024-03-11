@@ -9,14 +9,12 @@
 using SDLGame::System::IMAGE_TYPE,
         SDLGame::System::Image,
         std::string,
-        std::array,
-        std::filesystem::path;
-
+        std::array;
 // make clang-tidy not complain about "always true" for endian check
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 
-Image::Image(const path& imagePath) : File(imagePath) {
+Image::Image(const std::filesystem::path& imagePath) : File(imagePath) {
 
     array<unsigned char, 8> sigBuffer = {};
     fileStream.read(reinterpret_cast<char *>(sigBuffer.data()), sigBuffer.size());

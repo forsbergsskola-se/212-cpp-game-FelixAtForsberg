@@ -30,11 +30,11 @@ namespace SDLGame::System {
     }
 
 
-    bool IsFilenameOnly(const path &path) {
+    bool IsFilenameOnly(const path& path) {
         return (path.has_filename() && !path.has_parent_path());
     }
 
-    path AsAbsAssetPath(const std::filesystem::path &assetPath) {
+    path AsAbsAssetPath(const path& assetPath) {
 
 //        if (IsFilenameOnly(filename)) {
             return path{GetResourceDirectory() / assetPath};
@@ -44,7 +44,8 @@ namespace SDLGame::System {
 
     }
 
-    std::filesystem::path AsRelAssetPath(const path &assetPath) {
+
+    path AsRelAssetPath(const path& assetPath) {
 
 //        if (IsFilenameOnly(assetPath)) {
             return path{ DIR_REL_RESOURCES / assetPath };

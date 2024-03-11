@@ -5,7 +5,9 @@
 
 #include <SDL.h>
 
+#include "game/game_ui.h"
 #include "game/scene.h"
+#include "game/entities/entity_background.hpp"
 #include "game/entities/entity_bottle.hpp"
 #include "system/debug_log.hpp"
 #include "system/window.h"
@@ -16,7 +18,8 @@ namespace fs = std::filesystem;
 
 
 int main() {
-    const Window* window = new Window();
+    // 16:10 value because mac
+    const auto window = std::make_shared<Window>( 1040, 650 );
 
     // const auto newTexture = window->CreateTexture( "images/texture.png" );
     // window->RenderTexture( newTexture );
@@ -24,16 +27,20 @@ int main() {
     //https://wiki.libsdl.org/SDL2/SDL_Event
     SDL_Event event;
 
-
     Scene scene { window->renderContext };
+    scene.CreateEntity<EntityBackground>();
 
 
-    std::weak_ptr<EntityBottle> bottle1 = scene.CreateEntity<EntityBottle>();
-    std::weak_ptr<EntityBottle> bottle2 = scene.CreateEntity<EntityBottle>();
-    std::weak_ptr<EntityBottle> bottle3 = scene.CreateEntity<EntityBottle>();
+    int framerate;
+    scene.uiManager.AddPersistentLabel();
 
-    Position newPos = Position(50, 50);
-    std::weak_ptr<EntityBottle> bottlePos = scene.CreateEntity<EntityBottle>( newPos );
+    // std::weak_ptr<EntityBottle> bottle1 = scene.CreateEntity<EntityBottle>();
+    // std::weak_ptr<EntityBottle> bottle2 = scene.CreateEntity<EntityBottle>();
+    // std::weak_ptr<EntityBottle> bottle3 = scene.CreateEntity<EntityBottle>();
+
+    // Position newPos = Position(50, 50);
+    // std::weak_ptr<EntityBottle> bottlePos = scene.CreateEntity<EntityBottle>( newPos );
+
 
     scene.Render();
 
@@ -41,15 +48,31 @@ int main() {
 
     bool quitRequested = false;
 
+
+    Uint64 frameTimeLast = SDL_GetTicks64();
+
+    // short frameRate;
+
     while(!quitRequested) {
+
+       // LAST = NOW;
+       // NOW = SDL_GetPerformanceCounter();
+
+        Uint64 frameTimeCur     = SDL_GetTicks64();
+        const Uint64 frameDelta = frameTimeCur - frameTimeLast;
+        frameTimeLast           = frameTimeCur;
+
+        scene.TickEntities( frameDelta );
+
         while(SDL_PollEvent( &event ) != 0) {
             switch(event.type) {
                 case SDL_MOUSEBUTTONDOWN:
                     if(event.button.button == SDL_BUTTON_LEFT) {
-                        int x = event.button.x;
-                        int y = event.button.y;
+                        const float x = event.button.x;
+                        const float y = event.button.y;
                         DebugLog::Log( "Click at: ", x, " ", y );
-                        auto bottle = scene.CreateEntity<EntityBottle>( Position{x, y} );
+                        auto bottle = scene.CreateEntity<EntityBottle>( Position { x, y } );
+
                     }
 
                 case SDL_KEYDOWN:
@@ -63,6 +86,14 @@ int main() {
 
         }
         scene.Render();
+
+
+
+        // scene.TickEntities( deltaTime );
+        // SDL_Delay( 16 );
+
+        // DebugLog::Log(frameTime, " - ", SDL_GetTicks64() );
+        // timeFrameLast = SDL_GetPerformanceCounter();
     }
     return 0;
 }

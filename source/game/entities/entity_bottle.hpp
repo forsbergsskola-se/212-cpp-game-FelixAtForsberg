@@ -20,8 +20,28 @@ namespace SDLGame {
 
     private:
 
-        void Tick() override {
+        void Tick( const double& frameDelta ) override {
 
+
+            // const Position nextPos = this->pos += Position(0, 0.1 * frameDelta);
+
+
+            this->pos += Position(0, 0.1 * frameDelta);
+
+
+            // this->pos.y += 1 * frameDelta;
+
+            // DebugLog::LogMagenta(
+                // "Bottle tick: ",
+                // "\n  FrameDelta: ",  frameDelta,
+                // "\n  Current Pos: ", pos, ", "
+                // "\n     Next Pos: ", nextPos );
+
+            // Destroy();
         }
+
+        // void Destroy() const {
+        //     delete this;
+        // }
     };
 }

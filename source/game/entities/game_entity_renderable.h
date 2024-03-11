@@ -14,7 +14,11 @@ namespace SDLGame {
 
     public:
 
-        explicit GameEntityRenderable( const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context );
+        // explicit GameEntityRenderable( const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context );
+
+
+        GameEntityRenderable( const std::filesystem::path& imagePath, const std::weak_ptr<RenderContext>& context );
+
 
         virtual void RenderEntity();
 

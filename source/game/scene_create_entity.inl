@@ -12,7 +12,7 @@ namespace SDLGame {
         // could use 2048 bits, 256 bytes to represent empty spots
         // and do bytewise -> bitwise binary search on since
         // on smallest addressible, heck I'll get some type punning going and
-
+        // const Scene& scene = *this;
         const std::shared_ptr<TEntity> derivedPtr = std::make_shared<TEntity>( renderContext );
         const auto baseEntityPtr = std::static_pointer_cast<GameEntity>( derivedPtr );
         Entities.at( entsTail++ ) = baseEntityPtr;
@@ -26,9 +26,11 @@ namespace SDLGame {
         return entDerivedWkPtr;
     }
 
+
+
     // Create Entity at Position
     template <HasPositionField TEntity>
-    std::weak_ptr<TEntity> Scene::CreateEntity(Position pos) {
+    std::weak_ptr<TEntity> Scene::CreateEntity(const Position pos) {
 
         if(LOG_SCENE_ENTITY_CREATION)
             DebugLog::Log( "[CreateEntity] Position Overload Invoked: ", pos.x, ", ", pos.y );

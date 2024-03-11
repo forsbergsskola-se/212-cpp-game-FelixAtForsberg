@@ -18,7 +18,7 @@ using namespace SDLGame;
 
 constexpr std::array<uint8_t, 4> INITIAL_RENDERER_COLOR { 255, 255, 255, 255 };
 
-Window::Window() {
+Window::Window(const int& width, const int& height ) {
 
 
     SDL_Init( SDL_INIT_VIDEO );
@@ -38,8 +38,8 @@ Window::Window() {
                                  "SDLGame",
                                  SDL_WINDOWPOS_UNDEFINED,
                                  SDL_WINDOWPOS_UNDEFINED,
-                                 SCREEN_WIDTH,
-                                 SCREEN_HEIGHT,
+                                 width,
+                                 height,
                                  SDL_WINDOW_SHOWN
                                 );
 
@@ -64,7 +64,7 @@ Window::Window() {
 }
 
 Window::~Window() {
-    std::cout << "window was destroyed";
+    DebugLog::Log("Window was destroyed");
     //Destroy window
     SDL_DestroyWindow( sdlWindow );
     sdlWindow     = nullptr;

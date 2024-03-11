@@ -10,16 +10,22 @@ namespace SDLGame {
 
     class GameEntity {
     protected:
-        virtual ~GameEntity() = 0;
 
-    public:
         explicit GameEntity();
 
 
+        virtual ~GameEntity() = 0;
+
+    public:
+        // explicit GameEntity();
+
+    // parent of which this entity is a child scene
+    // const Scene& scene;
+
     virtual void SpawnAt(int x, int y) {}
 
-        virtual void Tick() = 0;
-        bool physicsUseGravity = true;
+    virtual void Tick( const double& frameDelta ) = 0;
+    bool physicsUseGravity = true;
 
     };
 
