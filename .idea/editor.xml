@@ -64,5 +64,11 @@
     <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/BLANK_LINES_AROUND_FUNCTION_DEFINITION/@EntryValue" value="2" type="long" />
     <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/BLANK_LINES_AFTER_ACCESS_SPECIFIER/@EntryValue" value="1" type="long" />
     <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/BLANK_LINES_AROUND_FUNCTION_DECLARATION/@EntryValue" value="2" type="long" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/@KeyIndexDefined" value="true" type="bool" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/Reformat/@EntryValue" value="true" type="bool" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/ShortenQualifiedReferences/@EntryValue" value="true" type="bool" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/Applicability/=Live/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/Scope/=F6696F8185506F41B9C4252540BE9C18/@KeyIndexDefined" value="true" type="bool" />
+    <option name="/Default/PatternsAndTemplates/LiveTemplates/Template/=9335E0404AC3EB4C87B532FE827EF30E/Scope/=F6696F8185506F41B9C4252540BE9C18/Type/@EntryValue" value="InCppFile" type="string" />
   </component>
 </project>

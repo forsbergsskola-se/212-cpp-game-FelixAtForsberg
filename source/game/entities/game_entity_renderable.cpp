@@ -18,7 +18,7 @@ void SDLGame::GameEntityRenderable::RenderEntity() {
     if(const auto renderContext = this->texture->renderContext.lock()) {
         const auto renderer = renderContext->sdl.renderer;
 
-        const PositionedRect targetRect = { pos, this->texture->size };
+        const Bounds targetRect { pos, this->texture->size };
 
         // wrap SDL_Rect so it gets destroyed after RenderEntity call
         const std::unique_ptr<SDL_Rect> dstRect( new SDL_Rect( targetRect ) );

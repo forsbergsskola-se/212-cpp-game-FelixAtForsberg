@@ -43,7 +43,7 @@ namespace SDLGame {
 
     void Scene::TickEntities(const Uint64 &frameDelta) const {
 
-        // std::cout << "Ticking, Tick Delta: " << frameDelta << std::endl;
+        std::cout << "Ticking, Tick Delta: " << frameDelta << std::endl;
 
         // could create an iterator for entities that only returns valid weak pointers directly?
         for (const auto &entSharedPtr : Entities) {

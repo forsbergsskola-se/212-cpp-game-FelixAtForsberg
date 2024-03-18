@@ -1,5 +1,6 @@
 #include "game/game_ui.h"
 
+#include "game/game.h"
 #include "system/debug_log.hpp"
 #include "system/system_static.h"
 #include "system/file/file.h"
@@ -13,34 +14,51 @@ namespace SDLGame {
     UIManager::UIManager( const std::weak_ptr<RenderContext>& renderContext ) : renderContext( renderContext ) {}
 
 
-    void UIManager::AddPersistentLabel() {
+    LabelHandle UIManager::AddPersistentLabel() {
 
         using namespace std::string_literals;
-
 
         const auto fontFile = System::File { System::AsRelAssetPath( "fonts/Roboto_Mono/static/RobotoMono-Regular.ttf" ) };
 
         if(!fontFile.exists)
             DebugLog::Error( "ERROR! Unable to find font: ", fontFile.path );
 
-        auto font = Font { fontFile.path.generic_string(), 72 };
+        const auto font = Font { fontFile.path.generic_string(), 16 };
 
-        persistentLabels.emplace_back( std::make_unique<Label>( "Test"s, font, renderContext ) );
+        const auto& label = persistentLabels.emplace_back( std::make_unique<Label>( "Test"s, font, renderContext ) );
+
+        const LabelHandle handle { *this, *label }; // construct handle from references
+
+        return handle;
     }
 
 
     void UIManager::Render() const {
-        for(const auto& element : persistentLabels)
+        uint labelVerticalOffset = 0;
+
+        // Render the only thing UIManager currently supports
+        for(const auto& element : persistentLabels) {
+
+            constexpr int verticalPadding = -4;
+            constexpr int horizontalMargin = 4;
+
             element->RenderTo( renderContext );
+
+            element->renderOffset.x = horizontalMargin;
+            element->renderOffset.y = labelVerticalOffset;
+            labelVerticalOffset += element->bounds().size.h + verticalPadding;
+        }
+
     }
 
 
     // --------- Label ---------
 
     // Could forego renderContext if we don't update the texture upon creation
+    // Label could also perhaps just store a reference to the renderContext
     Label::Label( const std::string& text, const Font& font, const std::weak_ptr<RenderContext>& ctx )
-    : text { text },
-      font { font }
+    : font { font },
+      text { text }
     {
         UpdateTexture( ctx );
     }
@@ -70,12 +88,16 @@ namespace SDLGame {
     }
 
     void Label::RenderTo( const std::weak_ptr<RenderContext>& renderContext ) {
+
         if(const auto ctx = renderContext.lock()) {
 
             SDL_Renderer* renderer = ctx->sdl.renderer;
 
-            const SDL_Rect src  = this->sdlLabel.rect;
-            const SDL_Rect dest = this->sdlLabel.rect;
+            const SDL_Rect& src  = this->sdlLabel.rect;
+            const SDL_Rect  dest {
+                this->sdlLabel.rect.x + renderOffset.x, this->sdlLabel.rect.y + renderOffset.y,
+                this->sdlLabel.rect.w, this->sdlLabel.rect.h };
+
 
             SDL_RenderCopy( renderer, this->sdlLabel.texture.get(), &src, &dest );
         } else {
@@ -84,7 +106,19 @@ namespace SDLGame {
     }
 
 
-        // SDL_BlitSurface(textSurface, NULL, renderContext.lock()->sdl.surface, &destRect);
+    Bounds Label::bounds() const {
+        return Bounds {sdlLabel.rect};
+    }
+
+
+    void LabelHandle::SetText( const std::string& newText ) const {
+        if (label.text == newText) return; // texture's text is already correct
+        label.text = newText;
+        label.UpdateTexture( uiManager.renderContext );
+    }
+
+
+    // SDL_BlitSurface(textSurface, NULL, renderContext.lock()->sdl.surface, &destRect);
 
 
 

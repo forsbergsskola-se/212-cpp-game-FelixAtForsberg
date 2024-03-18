@@ -26,7 +26,7 @@ Texture::Texture( const std::filesystem::path& imagePath, const std::weak_ptr<Re
         DebugLog::LogError( "Attempted to create texture with non-existent path: ", imagePath );
     }
 
-    this->size = { imgFile.width, imgFile.height };
+    this->size = Dimensions{ imgFile.width, imgFile.height };
 
     //    SDL_Rect rect = {0, 0, imgFile.width, imgFile.height};
     this->sdl.nativeRect = SDL_Rect { 0, 0, imgFile.width, imgFile.height };

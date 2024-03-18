@@ -4,10 +4,12 @@
 #include <string>
 #include <vector>
 
+#include "game/game.h"
 #include "graphics/render_context.hpp"
 #include "system/sdl_cpp_interop.hpp"
 
 namespace SDLGame {
+    struct LabelHandle;
     struct Label;
 
     template <typename T>
@@ -16,10 +18,10 @@ namespace SDLGame {
     };
 
 
+    // Part of 'Scene' class to manage labels
+    class UIManager {
 
-    struct UIManager {
-
-        // public:
+    public:
         explicit UIManager( const std::weak_ptr<RenderContext>& renderContext );
 
 
@@ -31,10 +33,12 @@ namespace SDLGame {
         // template <Printable T>
         // void AddPersistentStatusLabel(T ref);
 
-        void AddPersistentLabel();
+        LabelHandle AddPersistentLabel();
 
 
+    private:
         std::vector<std::unique_ptr<Label>> persistentLabels;
+
         // std::vector< std::unique_ptr<UIElement>> elements;
     };
 
@@ -46,7 +50,7 @@ namespace SDLGame {
         virtual ~UIElement() = default;
 
 
-        virtual void RenderTo( const std::weak_ptr<RenderContext>& renderContext ) = 0;
+        virtual void RenderTo( const std::weak_ptr<RenderContext>& renderContext) = 0;
     };
 
 
@@ -85,15 +89,24 @@ namespace SDLGame {
 
         explicit Label( const std::string& text, const Font& font, const std::weak_ptr<RenderContext>& ctx );
 
-        std::string text;
+        void RenderTo( const std::weak_ptr<RenderContext>& renderContext ) override;
+
+
+        Bounds bounds() const; // basically a getter + cast for internal SDLRect
+
+        Position renderOffset = Position{};
+
+
+    private:
+        friend LabelHandle; // modifying this object is done through the handle alone
 
         const Font font;
 
-        // Must be called if text changes
-        // There could be better soltuions, see problem ID 3eb9bf17-0e72-463c-b961-c491236c3179
-        void UpdateTexture( const std::weak_ptr<RenderContext>& renderContext );
+        std::string text;
 
-        void RenderTo( const std::weak_ptr<RenderContext>& renderContext ) override;
+        // There could be better solutions (observer pattern), see problem ID 3eb9bf17-0e72-463c-b961-c491236c3179
+        // Must be called to change texture if text/font changes
+        void UpdateTexture( const std::weak_ptr<RenderContext>& renderContext );
 
         // cached texture required for SDL text drawing,
         // with rect copied from temporary surface gotten from TTF_RenderUTF8
@@ -102,8 +115,6 @@ namespace SDLGame {
                 texture{ nullptr },
                 rect{ 0,0,0,0 } {
             }
-
-
 
 
             // elememt_type, deleter_type
@@ -117,9 +128,23 @@ namespace SDLGame {
             SDL_Rect rect;
 
         } sdlLabel;
-
     };
 
+    // Acts as the "interface" for labels, as they are
+    // owned by the UIManager
+    struct LabelHandle {
 
+        LabelHandle( const UIManager& uiManager, Label& label )
+        : uiManager { uiManager },
+          label { label } {}
+
+
+        void SetText( const std::string& newText ) const;
+
+    private:
+        const UIManager& uiManager; // holds renderContext, perhaps this just be renderContext instead?
+        Label& label; // label we're a handle to
+
+    };
 
 }

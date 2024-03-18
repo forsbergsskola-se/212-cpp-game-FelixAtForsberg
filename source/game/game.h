@@ -5,18 +5,20 @@
 namespace SDLGame {
 
     struct Dimensions {
+        explicit Dimensions();
+        explicit Dimensions( int w, int h);
+
         int w, h;
 
         // allow construction of SDL_Rect from Dimensions
-        explicit operator SDL_Rect() const {
-            return {0,0, w, h};
-        }
+        explicit operator SDL_Rect() const;
     };
 
     struct Position {
         int x = 0, y = 0;
 
-        explicit Position(const float x = 0, const float y = 0) : x(x), y(y) {}
+        explicit Position(const float x = 0, const float y = 0);
+
 
         friend std::ostream& operator<<(std::ostream& lhs, const Position& rhs);
 
@@ -24,19 +26,23 @@ namespace SDLGame {
 
     };
 
-    struct PositionedRect {
+    struct Bounds {
         Position pos;
         Dimensions size;
 
-        // allow construction of SDL_Rect from PositionedRect
-        explicit operator SDL_Rect() const {
-            return {pos.x, pos.y, size.w, size.h};
-    }
 
-        // explicit operator SDL_Rect*() const {
-        // SDL_Rect* rect = new SDL_Rect{0, 0,0, 0};
-        // return rect;
-        // }
+        explicit Bounds();
+
+        explicit Bounds( float x, float y, int w, int h);
+
+        explicit Bounds( Position pos, Dimensions size);
+
+        explicit Bounds( const SDL_Rect& sdlRect );
+
+        // allow construction of SDL_Rect from Bounds
+        explicit operator SDL_Rect() const;
+
+
 
     };
 
