@@ -9,6 +9,6 @@ namespace SDLGame {
 
     GameEntity::~GameEntity() {}
 
-    void GameEntity::Tick(const double &frameDelta) {}
+    void GameEntity::Tick( const uint64_t& frameDelta ) {}
 
 }

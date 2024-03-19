@@ -3,7 +3,6 @@
 #include <iostream>
 #include <queue>
 #include <string>
-#include <format>
 
 #include <SDL.h>
 
@@ -12,13 +11,16 @@
 #include "game/entities/entity_background.hpp"
 #include "game/entities/entity_bottle.hpp"
 #include "system/debug_log.hpp"
-#include "system/framecounter.h"
+#include "system/framecounter.hpp"
 #include "system/window.h"
 
 using namespace SDLGame;
 using namespace std::literals::string_literals;
 
 namespace fs = std::filesystem;
+
+using std::chrono::steady_clock;
+using time_point = steady_clock::time_point;
 
 
 int main() {
@@ -34,13 +36,13 @@ int main() {
     auto frameCounter = FrameCounter{};
     uint bottlesSpawned = 0;
 
-    constexpr Uint64 updateFrameLabelDelta = 500; // update framerate labels every x ms
-    Uint64 lastFrameLabelUpdate = SDL_GetTicks64();
+    constexpr std::chrono::microseconds updateFrameLabelDelta = 500ms; // update framerate labels every x ms
+    time_point lastFrameLabelUpdate = steady_clock::now();
 
 
     const auto labelFrameCounterBufferSize         = scene.uiManager.AddPersistentLabel();
 
-    labelFrameCounterBufferSize.SetText("Frametime Memory Count: "s + std::to_string( frameCounter.bufferCapacity ));
+    labelFrameCounterBufferSize.SetText("Memorized Frame Times: "s + std::to_string( frameCounter.BufferCapacity ));
 
     const auto labelFrametimeAvg         = scene.uiManager.AddPersistentLabel();
     const auto labelFrametime      = scene.uiManager.AddPersistentLabel();
@@ -62,15 +64,16 @@ int main() {
 
     bool quitRequested = false;
 
-    Uint64 lastEntityTick = 0;
+    time_point lastEntityTick;
 
     while(!quitRequested) {
 
         frameCounter.FrameStart();
 
-        Uint64 entsDeltaTime = SDL_GetTicks64() - lastEntityTick;
-        scene.TickEntities( entsDeltaTime );
-        lastEntityTick = SDL_GetTicks64();
+        std::chrono::nanoseconds entsDeltaTime = steady_clock::now() - lastEntityTick;
+
+        scene.TickEntities( entsDeltaTime.count() );
+        lastEntityTick = steady_clock::now();
 
 
         while(SDL_PollEvent( &event ) != 0) {
@@ -100,11 +103,13 @@ int main() {
         // Set label text
         labelBottlesSpawned.SetText( "Bottles spawned: "s + std::to_string(bottlesSpawned) );
 
-        if ( frameCounter.frameStartTick > (lastFrameLabelUpdate + updateFrameLabelDelta)) {
-            lastFrameLabelUpdate = frameCounter.frameStartTick;
 
-               labelFrametime.SetText( "Frametime     (ms): "s + std::to_string( frameCounter.FrameTimeLast() ) );
-            labelFrametimeAvg.SetText( "Frametime Avg (ms): "s + std::to_string( frameCounter.FrameTimeAverage() )  );
+
+        if ( frameCounter.FrameStartTime > (lastFrameLabelUpdate + updateFrameLabelDelta)) {
+            lastFrameLabelUpdate = frameCounter.FrameStartTime;
+
+               labelFrametime.SetText( "Frametime     (ms): "s + std::to_string( frameCounter.FrameTimeLast().count() ) );
+            labelFrametimeAvg.SetText( "Frametime Avg (ms): "s + std::to_string( frameCounter.FrameTimeAverage().count() )  );
 
                      labelFPS.SetText( "FPS: "s     + std::to_string( frameCounter.FPS() ) );
                   labelFPSAvg.SetText( "FPS Avg: "s + std::to_string( frameCounter.FPSAverage() ) );

@@ -22,7 +22,7 @@ namespace SDLGame {
 
     private:
 
-        void Tick(const double&) override {
+        void Tick( const uint64_t& ) override {
 
         }
 

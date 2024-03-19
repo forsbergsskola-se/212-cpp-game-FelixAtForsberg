@@ -17,7 +17,10 @@ namespace SDLGame {
     struct Position {
         int x = 0, y = 0;
 
-        explicit Position(const float x = 0, const float y = 0);
+        explicit Position(const decltype(x) x = 0, const decltype(y) y = 0);
+
+
+        Position( float x, float y );
 
 
         friend std::ostream& operator<<(std::ostream& lhs, const Position& rhs);

@@ -57,7 +57,7 @@ namespace SDLGame {
         void RenderUI() const;
 
 
-        void TickEntities( const Uint64 &frameDelta ) const;
+        void TickEntities( const uint64_t frameDelta ) const;
 
 
         void ClearCurrentRender() const;

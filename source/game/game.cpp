@@ -19,9 +19,17 @@ namespace SDLGame {
         return {0,0, w, h};
     }
 
+
+
     // ------------ Position ------------
 
-    Position::Position( const float x, const float y ): x(x), y(y) {}
+    Position::Position( const decltype(x) x, const decltype(y) y ) :
+    x{x}, y{y}
+    {}
+
+    Position::Position( const float x, const float y ) :
+    x{static_cast<int>(x)}, y{ static_cast<int>(y) }
+    {}
 
     Position& Position::operator+=( const Position& rhs ) {
         this->x += rhs.x;

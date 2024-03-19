@@ -20,13 +20,24 @@ namespace SDLGame {
 
     private:
 
-        void Tick( const double& frameDelta ) override {
+        void Tick( const uint64_t& frameDelta ) override {
+            static Uint64 lifetime = 0;
 
+            lifetime += frameDelta;
 
             // const Position nextPos = this->pos += Position(0, 0.1 * frameDelta);
 
+            // velocity = distance / time
+            // velocity = gravitational constant * time
 
-            this->pos += Position(0, 0.1 * frameDelta);
+            // distance = velocity * time
+
+            const float velocity = 9.82 * (static_cast<float>(lifetime)/1000.f);
+            const int distance = velocity * (static_cast<float>(lifetime)/1000.f);
+
+
+            const auto newPos = Position{ this->pos.x, distance, };
+            this->pos   = newPos;
 
 
             // this->pos.y += 1 * frameDelta;

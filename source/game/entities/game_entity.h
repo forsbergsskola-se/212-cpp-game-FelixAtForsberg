@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_stdinc.h>
 
 // when you have support for textures
 // TODO 3: add support for game objects (textures and positions and sizes)
@@ -24,7 +25,7 @@ namespace SDLGame {
 
     virtual void SpawnAt(int x, int y) {}
 
-    virtual void Tick( const double& frameDelta ) = 0;
+    virtual void Tick( const uint64_t& frameDelta ) = 0;
     bool physicsUseGravity = true;
 
     };
