@@ -31,8 +31,9 @@
     <inspection_tool class="ConvertInclude" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
     </inspection_tool>
-    <inspection_tool class="CppClassCanBeFinal" enabled="true" level="SUGGESTION" enabled_by_default="true" editorAttributes="SUGGESTION" />
+    <inspection_tool class="CppClassCanBeFinal" enabled="true" level="WARNING" enabled_by_default="true" editorAttributes="SUGGESTION" />
     <inspection_tool class="CppDefaultCaseNotHandledInSwitchStatement" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CppRedundantParentheses" enabled="true" level="TEXT ATTRIBUTES" enabled_by_default="true" editorAttributes="CONSIDERATION_ATTRIBUTES" />
     <inspection_tool class="DanglingPointer" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="Project Files" level="WARNING" enabled="true" />
     </inspection_tool>
