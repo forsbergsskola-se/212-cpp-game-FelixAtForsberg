@@ -4,6 +4,9 @@
 
 
 namespace SDLGame {
+    using namespace std::chrono_literals;
+
+
     Scene::Scene( const std::shared_ptr<RenderContext>& context ) : uiManager { context },
     // Scene::Scene( std::shared_ptr<RenderContext> context ) : uiManager { context },
                                                              Entities  { std::array<std::shared_ptr<GameEntity>, MAX_ENTITIES>() },
@@ -40,6 +43,14 @@ namespace SDLGame {
 
         }
     }
+    void Scene::TickPhysics() const {
+
+        // Todo: move elsewhere
+        constexpr auto physicsTimeStep = 5ms;
+
+
+
+    }
 
     void Scene::TickEntities( const uint64_t frameDelta ) const {
 
@@ -57,6 +68,7 @@ namespace SDLGame {
 
         }
     }
+
 
     // call RenderPresent with current (renderContext) frame buffer
     void Scene::ClearCurrentRender() const {

@@ -1,13 +1,14 @@
 #pragma once
 
+#include "game_entity_physics.h"
 #include "game_entity_renderable.h"
 
 
 namespace SDLGame {
 
-    struct EntityBottle final : GameEntityRenderable {
+    struct EntityBottle final : GameEntityPhysical {
 
-        explicit EntityBottle( const std::weak_ptr<RenderContext>& context ) : GameEntityRenderable(texturePath, context) {
+        explicit EntityBottle( const std::weak_ptr<RenderContext>& context ) : GameEntityPhysical(texturePath, context) {
 
         }
 
@@ -21,9 +22,6 @@ namespace SDLGame {
     private:
 
         void Tick( const uint64_t& frameDelta ) override {
-            static Uint64 lifetime = 0;
-
-            lifetime += frameDelta;
 
             // const Position nextPos = this->pos += Position(0, 0.1 * frameDelta);
 
@@ -32,15 +30,12 @@ namespace SDLGame {
 
             // distance = velocity * time
 
-            const float velocity = 9.82 * (static_cast<float>(lifetime)/1000.f);
-            const int distance = velocity * (static_cast<float>(lifetime)/1000.f);
+
+            // const auto newPos = Position{ this->pos.x, distance, };
+            // this->pos   = newPos;
 
 
-            const auto newPos = Position{ this->pos.x, distance, };
-            this->pos   = newPos;
-
-
-            // this->pos.y += 1 * frameDelta;
+            // this->pos.y += 1 / frameDelta;
 
             // DebugLog::LogMagenta(
                 // "Bottle tick: ",
@@ -49,6 +44,10 @@ namespace SDLGame {
                 // "\n     Next Pos: ", nextPos );
 
             // Destroy();
+        }
+
+        void PhysicsTick() override {
+            this->pos.y += 1;
         }
 
         // void Destroy() const {

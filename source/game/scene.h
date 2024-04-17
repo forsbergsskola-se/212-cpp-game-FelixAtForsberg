@@ -50,6 +50,8 @@ namespace SDLGame {
 
         void RenderEntities() const;
 
+        void TickPhysics() const;
+
 
         void DisplayCurrentRender() const;
 

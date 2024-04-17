@@ -30,4 +30,5 @@ namespace SDLGame {
         const std::shared_ptr<Texture> texture;
     };
 
+
 }
